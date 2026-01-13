@@ -1,0 +1,16 @@
+# Exported from Render on 2026-01-13T00:59:46Z
+version: "1"
+projects:
+- name: My project
+  environments:
+  - name: Production
+    services:
+    - type: web
+      name: TT4
+      runtime: node
+      repo: https://github.com/MouradIntellij/TT4
+      plan: free
+      region: oregon
+      buildCommand: yarn install
+      startCommand: node server.js
+      autoDeployTrigger: commit
