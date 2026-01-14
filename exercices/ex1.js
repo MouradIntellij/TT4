@@ -6,36 +6,85 @@ function getEx1Html(nom, age) {
 <head>
 <meta charset="UTF-8">
 <title>Exercice 1 — Querystring</title>
-<style>
-body { font-family: Arial, sans-serif; background: #f0f4f8; margin: 0; padding: 0; }
-.container { max-width: 700px; margin: 50px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-h1 { color: #4caf50; }
-.result { background: #e8f5e9; padding: 15px; border-radius: 8px; margin-top: 20px; font-size: 1.1em; }
-.instructions { font-size: 0.9em; color: #555; margin-top: 10px; }
-a.button { display: inline-block; margin-top: 20px; padding: 10px 15px; background: #4caf50; color: white; text-decoration: none; border-radius: 5px; }
-a.button:hover { background: #45a049; }
-code { background: #eee; padding: 2px 5px; border-radius: 3px; }
-</style>
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
 </head>
-<body>
-<div class="container">
-<h1>🟢 Exercice 1 — Querystring</h1>
+<body class="bg-slate-100 min-h-screen flex items-center justify-center">
 
-<p class="instructions">
-Cet exercice te montre comment passer des paramètres via l'URL et les lire côté serveur.
-Par exemple : <code>?nom=Ali&age=25</code>
-</p>
+<div class="bg-white w-full max-w-xl p-8 rounded-xl shadow-lg">
+    <h1 class="text-2xl font-bold text-green-600 mb-4">
+        🟢 Exercice 1 — Querystring
+    </h1>
 
-<div class="result">
-${
+    <p class="text-gray-600 mb-6 text-sm">
+        Complète le formulaire ci-dessous.  
+        Les données seront envoyées via l’URL (<strong>méthode GET</strong>).
+    </p>
+
+    <!-- Formulaire -->
+    <form method="GET" class="space-y-4">
+        <div>
+            <label class="block text-sm font-medium text-gray-700">
+                Nom
+            </label>
+            <input
+                type="text"
+                name="nom"
+                placeholder="Ex: Ali"
+                class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                required
+            >
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700">
+                Âge
+            </label>
+            <input
+                type="number"
+                name="age"
+                placeholder="Ex: 25"
+                class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                required
+            >
+        </div>
+
+        <button
+            type="submit"
+            class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition"
+        >
+            Envoyer
+        </button>
+    </form>
+
+    <!-- Résultat -->
+    <div class="mt-6 p-4 rounded-md bg-green-50 border border-green-200">
+        ${
         nom && age
-            ? `Bonjour <strong>${nom}</strong> ! 🎉<br>Vous avez <strong>${age}</strong> ans.<br><em>Ceci vient des paramètres passés dans l'URL.</em>`
-            : `Aucun paramètre détecté.<br>Ajoute <code>?nom=TonNom&age=TonAge</code> à l’URL pour voir le résultat.`
+            ? `
+                <p class="text-green-800">
+                    Bonjour <strong>${nom}</strong> 🎉 <br>
+                    Vous avez <strong>${age}</strong> ans.
+                </p>
+                <p class="text-xs text-green-700 mt-2">
+                    Ces données proviennent de la querystring de l’URL.
+                </p>
+                `
+            : `
+                <p class="text-gray-500 text-sm">
+                    Aucun paramètre détecté pour l’instant.
+                </p>
+                `
     }
+    </div>
+
+    <a href="/" class="inline-block mt-6 text-sm text-green-600 hover:underline">
+        ← Retour accueil
+    </a>
 </div>
 
-<a class="button" href="/">← Retour accueil</a>
-</div>
 </body>
 </html>
 `;
