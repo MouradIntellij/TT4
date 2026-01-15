@@ -90,7 +90,7 @@ function handleEx3(req, res) {
 
 <p>
     <a href="/ex3">← Recommencer</a><br>
-    <a href="/">← Retour accueil</a>
+    <a href="/chapitre1.html">← Retour accueil</a>
 </p>
 
 </body>

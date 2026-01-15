@@ -69,7 +69,7 @@ Une route correspond à un <strong>chemin dans l’URL</strong>.
     ${contenu}
 </div>
 
-<p><a href="/">← Retour accueil</a></p>
+<p><a href="/chapitre1.html">← Retour accueil</a></p>
 
 </body>
 </html>

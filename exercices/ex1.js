@@ -80,7 +80,7 @@ function getEx1Html(nom, age) {
     }
     </div>
 
-    <a href="/" class="inline-block mt-6 text-sm text-green-600 hover:underline">
+    <a href="/chapitre1.html" class="inline-block mt-6 text-sm text-green-600 hover:underline">
         ← Retour accueil
     </a>
 </div>
