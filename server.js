@@ -9,6 +9,7 @@ const { getEx1Html } = require('./exercices/ex1.js');
 const { getEx2Html } = require('./exercices/ex2.js');
 const { getEx3Html } = require('./exercices/ex3.js');
 const { getEx4Html } = require('./exercices/ex4.js');
+const {handleEx3} = require("./exercices/ex3");
 // Ajouter ex5 → ex8 de la même manière
 // const { getEx5Html } = require('./exercices/ex5.js');
 // ...
@@ -45,20 +46,11 @@ const server = http.createServer((req, res) => {
         res.end(getEx2Html(pathname));
     }
 
-    else if (pathname === '/ex3') {
-        if (req.method === 'POST') {
-            let body = '';
-            req.on('data', chunk => body += chunk.toString());
-            req.on('end', () => {
-                const data = Object.fromEntries(new URLSearchParams(body));
-                res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-                res.end(getEx3Html(data));
-            });
-        } else {
-            res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-            res.end(getEx3Html());
-        }
+    else if (pathname.toLowerCase().startsWith('/ex3')) {
+        handleEx3(req, res);
     }
+
+
     else if (pathname === '/ex4') {
         if (req.method === 'POST') {
             let body = '';
