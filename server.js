@@ -40,10 +40,11 @@ const server = http.createServer((req, res) => {
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
         res.end(getEx1Html(nom, age));
     }
-    else if (pathname === '/ex2') {
+    else if (pathname.startsWith('/ex2')) {
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-        res.end(getEx2Html());
+        res.end(getEx2Html(pathname));
     }
+
     else if (pathname === '/ex3') {
         if (req.method === 'POST') {
             let body = '';
