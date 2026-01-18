@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter une Technologie</title>
+    <link rel="stylesheet" href="/output.css">
+</head>
+<body class="bg-gradient-to-br from-green-50 to-emerald-100 min-h-screen py-12">
+<div class="container mx-auto px-4 max-w-2xl">
+    <!-- En-tête -->
+    <div class="text-center mb-8">
+        <div class="inline-flex items-center justify-center w-16 h-16 bg-green-600 rounded-full mb-4">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+            </svg>
+        </div>
+        <h1 class="text-4xl font-bold text-gray-800 mb-2">Ajouter une Technologie</h1>
+        <p class="text-gray-600">Complétez le formulaire pour ajouter une nouvelle technologie à votre veille</p>
+    </div>
+
+    <!-- Formulaire -->
+    <div class="bg-white rounded-2xl shadow-xl p-8">
+        <form action="/add" method="POST" class="space-y-6">
+            <!-- Nom de la technologie -->
+            <div>
+                <label for="nom" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Nom de la technologie *
+                </label>
+                <input
+                        type="text"
+                        id="nom"
+                        name="nom"
+                        required
+                        placeholder="Ex: React, Vue.js, Docker..."
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all outline-none"
+                >
+            </div>
+
+            <!-- Catégorie -->
+            <div>
+                <label for="categorie" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Catégorie *
+                </label>
+                <select
+                        id="categorie"
+                        name="categorie"
+                        required
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all outline-none bg-white"
+                >
+                    <option value="">-- Sélectionnez une catégorie --</option>
+                    <option value="Frontend">Frontend</option>
+                    <option value="Backend">Backend</option>
+                    <option value="Base de données">Base de données</option>
+                    <option value="DevOps">DevOps</option>
+                    <option value="Mobile">Mobile</option>
+                    <option value="IA/ML">IA/ML</option>
+                    <option value="Cloud">Cloud</option>
+                    <option value="Autre">Autre</option>
+                </select>
+            </div>
+
+            <!-- Info pédagogique -->
+            <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-green-800">
+                            <strong>Méthode POST</strong> : Les données seront envoyées dans le corps de la requête HTTP
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boutons -->
+            <div class="flex gap-4">
+                <button
+                        type="submit"
+                        class="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                >
+                    Ajouter
+                </button>
+                <a
+                        href="/"
+                        class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-lg transition-colors text-center"
+                >
+                    Annuler
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Explications techniques -->
+    <div class="mt-8 bg-white rounded-xl p-6 shadow-lg">
+        <h3 class="font-bold text-gray-800 mb-4 flex items-center">
+            <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+            </svg>
+            Ce qui se passe dans le code Node.js
+        </h3>
+        <div class="space-y-3 text-sm text-gray-700">
+            <div class="flex items-start">
+                <span class="bg-green-100 text-green-800 font-mono text-xs px-2 py-1 rounded mr-3 mt-0.5">1</span>
+                <p>Le serveur reçoit la requête POST sur <code class="bg-gray-100 px-2 py-1 rounded">/add</code></p>
+            </div>
+            <div class="flex items-start">
+                <span class="bg-green-100 text-green-800 font-mono text-xs px-2 py-1 rounded mr-3 mt-0.5">2</span>
+                <p>Les données du formulaire sont parsées avec <code class="bg-gray-100 px-2 py-1 rounded">querystring.parse()</code></p>
+            </div>
+            <div class="flex items-start">
+                <span class="bg-green-100 text-green-800 font-mono text-xs px-2 py-1 rounded mr-3 mt-0.5">3</span>
+                <p>Validation : les champs nom et catégorie sont vérifiés</p>
+            </div>
+            <div class="flex items-start">
+                <span class="bg-green-100 text-green-800 font-mono text-xs px-2 py-1 rounded mr-3 mt-0.5">4</span>
+                <p>La fonction asynchrone <code class="bg-gray-100 px-2 py-1 rounded">saveTechno()</code> stocke les données (avec délai simulé)</p>
+            </div>
+            <div class="flex items-start">
+                <span class="bg-green-100 text-green-800 font-mono text-xs px-2 py-1 rounded mr-3 mt-0.5">5</span>
+                <p>Redirection HTTP 302 vers <code class="bg-gray-100 px-2 py-1 rounded">/list</code></p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

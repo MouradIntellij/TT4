@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonjour !</title>
+    <link rel="stylesheet" href="/output.css">
+</head>
+<body class="bg-gradient-to-br from-purple-50 to-pink-100 min-h-screen flex items-center justify-center">
+<div class="text-center">
+    <div class="bg-white rounded-3xl shadow-2xl p-12 max-w-lg">
+        <div class="mb-6">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-purple-100 rounded-full mb-4">
+                <svg class="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path>
+                </svg>
+            </div>
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">
+                Bonjour, <span class="text-purple-600">{{nom}}</span> ! 👋
+            </h1>
+            <p class="text-gray-600 mb-6">
+                Vous venez de tester le routage avec paramètres en Node.js natif.
+            </p>
+        </div>
+
+        <div class="bg-gray-50 rounded-xl p-6 mb-6">
+            <h3 class="font-semibold text-gray-700 mb-3 flex items-center">
+                <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Comment ça fonctionne ?
+            </h3>
+            <div class="text-left text-sm text-gray-600 space-y-2">
+                <p>1. Vous avez accédé à : <code class="bg-white px-2 py-1 rounded border text-purple-600">/hello?nom={{nom}}</code></p>
+                <p>2. Le serveur a parsé le paramètre avec <code class="bg-white px-2 py-1 rounded border">querystring</code></p>
+                <p>3. La valeur a été injectée dans le template HTML</p>
+            </div>
+        </div>
+
+        <div class="space-y-3">
+            <a href="/" class="block w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+                Retour à l'accueil
+            </a>
+            <a href="/hello?nom=Alice" class="block w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-lg transition-colors">
+                Tester avec "Alice"
+            </a>
+        </div>
+    </div>
+
+    <div class="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-4 max-w-lg mx-auto">
+        <p class="text-sm text-blue-800">
+            <strong>💡 Exercice :</strong> Essayez de modifier l'URL pour afficher votre propre nom !
+        </p>
+    </div>
+</div>
+</body>
+</html>

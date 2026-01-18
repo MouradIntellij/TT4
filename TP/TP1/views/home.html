@@ -1,1 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Node.js - Veille Technologique</title>
+    <link rel="stylesheet" href="/output.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+<div class="container mx-auto px-4 py-12">
+    <!-- En-tête -->
+    <header class="text-center mb-12">
+        <div class="inline-block bg-indigo-600 text-white px-6 py-2 rounded-full text-sm font-semibold mb-4">
+            TP Node.js Natif
+        </div>
+        <h1 class="text-5xl font-bold text-gray-800 mb-4">
+            Veille Technologique
+        </h1>
+        <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+            Application de gestion de technologies pour apprendre les fondamentaux de Node.js sans framework
+        </p>
+    </header>
 
+    <!-- Cartes principales -->
+    <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
+        <!-- Carte Ajouter -->
+        <a href="/add" class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-8">
+            <div class="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6 group-hover:bg-green-200 transition-colors">
+                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-3">Ajouter une Technologie</h2>
+            <p class="text-gray-600">
+                Ajoutez une nouvelle technologie à votre liste de veille.
+                <span class="text-sm block mt-2 text-indigo-600 font-semibold">
+                        Méthode POST + Formulaire HTML →
+                    </span>
+            </p>
+        </a>
+
+        <!-- Carte Consulter -->
+        <a href="/list" class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-8">
+            <div class="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-6 group-hover:bg-blue-200 transition-colors">
+                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-3">Consulter la Liste</h2>
+            <p class="text-gray-600">
+                Visualisez toutes les technologies ajoutées à votre veille.
+                <span class="text-sm block mt-2 text-indigo-600 font-semibold">
+                        Méthode GET + Rendu HTML →
+                    </span>
+            </p>
+        </a>
+    </div>
+
+    <!-- Section API -->
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+            <div class="flex items-center mb-6">
+                <div class="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full mr-4">
+                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800">API JSON</h2>
+                    <p class="text-gray-600 text-sm">Accédez aux données au format JSON</p>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 rounded-lg p-4 font-mono text-sm">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-green-400">GET</span>
+                    <button onclick="copyToClipboard()" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <code class="text-gray-300">http://localhost:3000/api/technos</code>
+            </div>
+
+            <a href="/api/technos" target="_blank" class="mt-4 inline-flex items-center text-purple-600 hover:text-purple-700 font-semibold">
+                Tester l'API
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- Section pédagogique -->
+    <div class="max-w-4xl mx-auto mt-12 bg-amber-50 border-l-4 border-amber-500 rounded-lg p-6">
+        <div class="flex items-start">
+            <div class="flex-shrink-0">
+                <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+            </div>
+            <div class="ml-4">
+                <h3 class="text-lg font-semibold text-amber-900 mb-2">Concepts Node.js explorés</h3>
+                <ul class="text-amber-800 space-y-1 text-sm">
+                    <li>✓ Module <code class="bg-amber-100 px-2 py-1 rounded">http</code> natif</li>
+                    <li>✓ Routage manuel (GET / POST)</li>
+                    <li>✓ Parsing de données (querystring)</li>
+                    <li>✓ Gestion asynchrone (Promises)</li>
+                    <li>✓ Serveur de fichiers statiques (CSS)</li>
+                    <li>✓ API REST JSON</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function copyToClipboard() {
+        navigator.clipboard.writeText('http://localhost:3000/api/technos');
+        alert('URL copiée !');
+    }
+</script>
+</body>
+</html>
