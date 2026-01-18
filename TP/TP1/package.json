@@ -1,19 +1,6 @@
 {
-  "name": "tp1",
-  "version": "1.0.0",
-  "description": "Mini application backend réalisée en Node.js natif.",
-  "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "npx tailwindcss -i ./public/styles.css -o ./public/output.css --watch"
-  },
-  "private": true,
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "devDependencies": {
-    "@tailwindcss/cli": "^4.1.18",
-    "tailwindcss": "^4.1.18"
+    "dev": "npx @tailwindcss/cli -i ./src/input.css -o ./public/output.css --watch"
   }
 }
