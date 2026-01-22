@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aide-Mémoire JavaScript ES6+ Interactif</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .search-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: #764ba2;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .category-btn {
+            padding: 15px;
+            background: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            color: #667eea;
+        }
+
+        .category-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            background: #667eea;
+            color: white;
+        }
+
+        .category-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+        }
+
+        .code-block code {
+            font-size: 14px;
+            line-height: 1.5;
+            white-space: pre;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: #764ba2;
+        }
+
+        .copy-btn.copied {
+            background: #28a745;
+        }
+
+        .example {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .example strong {
+            color: #764ba2;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .warning {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tr:hover {
+            background: #f5f5f5;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 30px;
+            margin-top: 50px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 15px;
+        }
+
+        .keyword { color: #ff79c6; font-weight: bold; }
+        .string { color: #50fa7b; }
+        .number { color: #bd93f9; }
+        .comment { color: #6272a4; font-style: italic; }
+        .function { color: #8be9fd; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>📚 Aide-Mémoire JavaScript ES6+  Collège LaSalle</h1>
+        <p>Guide complet et interactif pour mon groupe 420-TT4-AS  #01301 </p>
+
+    </header>
+
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="🔍 Rechercher une fonctionnalité JavaScript...">
+    </div>
+
+    <div class="nav-categories">
+        <button class="category-btn active" data-category="variables">Variables</button>
+        <button class="category-btn" data-category="types">Types de Données</button>
+        <button class="category-btn" data-category="operateurs">Opérateurs</button>
+        <button class="category-btn" data-category="conditions">Conditions</button>
+        <button class="category-btn" data-category="boucles">Boucles</button>
+        <button class="category-btn" data-category="fonctions">Fonctions</button>
+        <button class="category-btn" data-category="objets">Objets & POO</button>
+        <button class="category-btn" data-category="tableaux">Tableaux</button>
+        <button class="category-btn" data-category="dom">DOM</button>
+        <button class="category-btn" data-category="async">Asynchrone</button>
+        <button class="category-btn" data-category="modules">Modules</button>
+        <button class="category-btn" data-category="es6">ES6+ Features</button>
+    </div>
+
+    <!-- SECTION VARIABLES -->
+    <section class="section active" data-section="variables">
+        <h2>📦 Variables et Déclarations</h2>
+
+        <h3>let, const et var</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// ✅ let - variable réassignable avec portée de bloc</span>
+                <span class="keyword">let</span> nom = <span class="string">'Pierre'</span>;
+                nom = <span class="string">'Marie'</span>; <span class="comment">// ✅ OK</span>
+
+                <span class="comment">// ✅ const - constante, non réassignable</span>
+                <span class="keyword">const</span> PI = <span class="number">3.14159</span>;
+                <span class="comment">// PI = 3.14; ❌ ERREUR</span>
+
+                <span class="comment">// ⚠️ var - ancienne syntaxe (éviter)</span>
+                <span class="keyword">var</span> age = <span class="number">25</span>;</code>
+        </div>
+
+        <div class="note">
+            <strong>💡 Bonne pratique :</strong> Utilisez <code>const</code> par défaut. N'utilisez <code>let</code> que si vous devez réassigner la variable. Évitez <code>var</code>.
+        </div>
+
+        <h3>Portée des variables</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// Portée globale</span>
+                <span class="keyword">const</span> global = <span class="string">'accessible partout'</span>;
+
+                <span class="keyword">function</span> <span class="function">exemple</span>() {
+                <span class="comment">// Portée de fonction</span>
+                <span class="keyword">const</span> locale = <span class="string">'accessible dans la fonction'</span>;
+
+                <span class="keyword">if</span> (<span class="keyword">true</span>) {
+                <span class="comment">// Portée de bloc</span>
+                <span class="keyword">const</span> bloc = <span class="string">'accessible dans le bloc'</span>;
+                }
+                <span class="comment">// console.log(bloc); ❌ ERREUR</span>
+                }</code>
+        </div>
+
+        <h3>Destructuring</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// Destructuring d'objets</span>
+                <span class="keyword">const</span> personne = { nom: <span class="string">'Alice'</span>, age: <span class="number">30</span>, ville: <span class="string">'Paris'</span> };
+                <span class="keyword">const</span> { nom, age } = personne;
+                console.log(nom); <span class="comment">// 'Alice'</span>
+
+                <span class="comment">// Destructuring de tableaux</span>
+                <span class="keyword">const</span> nombres = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];
+                <span class="keyword">const</span> [premier, deuxieme, ...reste] = nombres;
+                console.log(premier); <span class="comment">// 1</span>
+                console.log(reste); <span class="comment">// [3, 4]</span></code>
+        </div>
+    </section>
+
+    <!-- SECTION TYPES DE DONNÉES -->
+    <section class="section" data-section="types">
+        <h2>🔤 Types de Données</h2>
+
+        <h3>Types Primitifs</h3>
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Exemple</th>
+            </tr>
+            <tr>
+                <td><strong>String</strong></td>
+                <td>Chaîne de caractères</td>
+                <td><code>'Bonjour' "Hello" `Template`</code></td>
+            </tr>
+            <tr>
+                <td><strong>Number</strong></td>
+                <td>Nombre (entier ou décimal)</td>
+                <td><code>42, 3.14, -10</code></td>
+            </tr>
+            <tr>
+                <td><strong>Boolean</strong></td>
+                <td>Vrai ou faux</td>
+                <td><code>true, false</code></td>
+            </tr>
+            <tr>
+                <td><strong>Null</strong></td>
+                <td>Absence de valeur</td>
+                <td><code>null</code></td>
+            </tr>
+            <tr>
+                <td><strong>Undefined</strong></td>
+                <td>Variable non définie</td>
+                <td><code>undefined</code></td>
+            </tr>
+            <tr>
+                <td><strong>Symbol</strong></td>
+                <td>Identifiant unique</td>
+                <td><code>Symbol('id')</code></td>
+            </tr>
+            <tr>
+                <td><strong>BigInt</strong></td>
+                <td>Grands entiers</td>
+                <td><code>9007199254740991n</code></td>
+            </tr>
+        </table>
+
+        <h3>Template Literals (ES6)</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="keyword">const</span> nom = <span class="string">'Pierre'</span>;
+                <span class="keyword">const</span> age = <span class="number">25</span>;
+
+                <span class="comment">// Interpolation de variables</span>
+                <span class="keyword">const</span> message = <span class="string">`Bonjour, je m'appelle ${nom} et j'ai ${age} ans`</span>;
+
+                <span class="comment">// Multi-lignes</span>
+                <span class="keyword">const</span> html = <span class="string">`
+  &lt;div&gt;
+    &lt;h1&gt;${nom}&lt;/h1&gt;
+    &lt;p&gt;Age: ${age}&lt;/p&gt;
+  &lt;/div&gt;
+`</span>;</code>
+        </div>
+
+        <h3>Conversion de Types</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// String → Number</span>
+                Number(<span class="string">'123'</span>); <span class="comment">// 123</span>
+                parseInt(<span class="string">'123px'</span>); <span class="comment">// 123</span>
+                parseFloat(<span class="string">'3.14'</span>); <span class="comment">// 3.14</span>
+
+                <span class="comment">// Number → String</span>
+                String(<span class="number">123</span>); <span class="comment">// '123'</span>
+                (<span class="number">123</span>).toString(); <span class="comment">// '123'</span>
+
+                <span class="comment">// Boolean</span>
+                Boolean(<span class="number">1</span>); <span class="comment">// true</span>
+                Boolean(<span class="number">0</span>); <span class="comment">// false</span>
+                Boolean(<span class="string">''</span>); <span class="comment">// false</span></code>
+        </div>
+    </section>
+
+    <!-- SECTION OPÉRATEURS -->
+    <section class="section" data-section="operateurs">
+        <h2>⚙️ Opérateurs</h2>
+
+        <h3>Opérateurs Arithmétiques</h3>
+        <div class="grid-2">
+            <div class="card">
+                <h4>Opérations de base</h4>
+                <div class="code-block">
+                    <code>+ <span class="comment">Addition</span>
+                        - <span class="comment">Soustraction</span>
+                        * <span class="comment">Multiplication</span>
+                        / <span class="comment">Division</span>
+                        % <span class="comment">Modulo (reste)</span>
+                        ** <span class="comment">Exponentielle</span></code>
+                </div>
+            </div>
+            <div class="card">
+                <h4>Incrémentation</h4>
+                <div class="code-block">
+                    <code>++ <span class="comment">Incrément</span>
+                        -- <span class="comment">Décrément</span>
+                        x++ <span class="comment">Post-incrémentation</span>
+                        ++x <span class="comment">Pré-incrémentation</span></code>
+                </div>
+            </div>
+        </div>
+
+        <h3>Opérateurs de Comparaison</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// Égalité stricte (type ET valeur)</span>
+                <span class="number">5</span> === <span class="number">5</span>; <span class="comment">// true</span>
+                <span class="number">5</span> === <span class="string">'5'</span>; <span class="comment">// false ⚠️</span>
+
+                <span class="comment">// Égalité faible (conversion automatique)</span>
+                <span class="number">5</span> == <span class="string">'5'</span>; <span class="comment">// true ⚠️ Éviter!</span>
+
+                <span class="comment">// Autres comparaisons</span>
+                !== <span class="comment">Différent strict</span>
+                != <span class="comment">Différent faible</span>
+                &lt; <span class="comment">Inférieur</span>
+                &gt; <span class="comment">Supérieur</span>
+                &lt;= <span class="comment">Inférieur ou égal</span>
+                &gt;= <span class="comment">Supérieur ou égal</span></code>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Attention :</strong> Utilisez toujours === et !== au lieu de == et != pour éviter les conversions implicites.
+        </div>
+
+        <h3>Opérateurs Logiques</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// ET logique (AND)</span>
+                <span class="keyword">true</span> && <span class="keyword">true</span>; <span class="comment">// true</span>
+                <span class="keyword">true</span> && <span class="keyword">false</span>; <span class="comment">// false</span>
+
+                <span class="comment">// OU logique (OR)</span>
+                <span class="keyword">true</span> || <span class="keyword">false</span>; <span class="comment">// true</span>
+                <span class="keyword">false</span> || <span class="keyword">false</span>; <span class="comment">// false</span>
+
+                <span class="comment">// NON logique (NOT)</span>
+                !<span class="keyword">true</span>; <span class="comment">// false</span>
+
+                <span class="comment">// Nullish Coalescing (ES2020)</span>
+                <span class="keyword">const</span> valeur = <span class="keyword">null</span> ?? <span class="string">'défaut'</span>; <span class="comment">// 'défaut'</span>
+
+                <span class="comment">// Optional Chaining (ES2020)</span>
+                <span class="keyword">const</span> nom = user?.profile?.name;</code>
+        </div>
+
+        <h3>Opérateur Ternaire</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="keyword">const</span> age = <span class="number">18</span>;
+                <span class="keyword">const</span> statut = age >= <span class="number">18</span> ? <span class="string">'majeur'</span> : <span class="string">'mineur'</span>;</code>
+        </div>
+    </section>
+
+    <!-- SECTION CONDITIONS -->
+    <section class="section" data-section="conditions">
+        <h2>🔀 Structures Conditionnelles</h2>
+
+        <h3>if / else if / else</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="keyword">const</span> note = <span class="number">15</span>;
+
+                <span class="keyword">if</span> (note >= <span class="number">16</span>) {
+                console.log(<span class="string">'Très bien'</span>);
+                } <span class="keyword">else if</span> (note >= <span class="number">14</span>) {
+                console.log(<span class="string">'Bien'</span>);
+                } <span class="keyword">else if</span> (note >= <span class="number">12</span>) {
+                console.log(<span class="string">'Assez bien'</span>);
+                } <span class="keyword">else</span> {
+                console.log(<span class="string">'Peut mieux faire'</span>);
+                }</code>
+        </div>
+
+        <h3>switch</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="keyword">const</span> jour = <span class="string">'lundi'</span>;
+
+                <span class="keyword">switch</span> (jour) {
+                <span class="keyword">case</span> <span class="string">'lundi'</span>:
+                console.log(<span class="string">'Début de semaine'</span>);
+                <span class="keyword">break</span>;
+                <span class="keyword">case</span> <span class="string">'vendredi'</span>:
+                console.log(<span class="string">'Bientôt le weekend!'</span>);
+                <span class="keyword">break</span>;
+                <span class="keyword">case</span> <span class="string">'samedi'</span>:
+                <span class="keyword">case</span> <span class="string">'dimanche'</span>:
+                console.log(<span class="string">'Weekend!'</span>);
+                <span class="keyword">break</span>;
+                <span class="keyword">default</span>:
+                console.log(<span class="string">'Jour de semaine'</span>);
+                }</code>
+        </div>
+
+        <div class="note">
+            <strong>💡 Astuce :</strong> N'oubliez pas le <code>break</code> dans chaque case du switch.
+        </div>
+    </section>
+
+    <!-- SECTION BOUCLES -->
+    <section class="section" data-section="boucles">
+        <h2>🔄 Boucles</h2>
+
+        <h3>Boucle for</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// Boucle for classique</span>
+                <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) {
+                console.log(i); <span class="comment">// 0, 1, 2, 3, 4</span>
+                }
+
+                <span class="comment">// for...of (itération sur les valeurs)</span>
+                <span class="keyword">const</span> fruits = [<span class="string">'pomme'</span>, <span class="string">'banane'</span>, <span class="string">'orange'</span>];
+                <span class="keyword">for</span> (<span class="keyword">const</span> fruit <span class="keyword">of</span> fruits) {
+                console.log(fruit);
+                }
+
+                <span class="comment">// for...in (itération sur les clés)</span>
+                <span class="keyword">const</span> personne = { nom: <span class="string">'Alice'</span>, age: <span class="number">30</span> };
+                <span class="keyword">for</span> (<span class="keyword">const</span> cle <span class="keyword">in</span> personne) {
+                console.log(cle, personne[cle]);
+                }</code>
+        </div>
+
+        <h3>Boucle while</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="keyword">let</span> i = <span class="number">0</span>;
+                <span class="keyword">while</span> (i &lt; <span class="number">5</span>) {
+                console.log(i);
+                i++;
+                }
+
+                <span class="comment">// do...while (exécuté au moins une fois)</span>
+                <span class="keyword">let</span> j = <span class="number">0</span>;
+                <span class="keyword">do</span> {
+                console.log(j);
+                j++;
+                } <span class="keyword">while</span> (j &lt; <span class="number">5</span>);</code>
+        </div>
+
+        <h3>break et continue</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// break - sort de la boucle</span>
+                <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) {
+                <span class="keyword">if</span> (i === <span class="number">5</span>) <span class="keyword">break</span>;
+                console.log(i); <span class="comment">// 0, 1, 2, 3, 4</span>
+                }
+
+                <span class="comment">// continue - passe à l'itération suivante</span>
+                <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) {
+                <span class="keyword">if</span> (i === <span class="number">2</span>) <span class="keyword">continue</span>;
+                console.log(i); <span class="comment">// 0, 1, 3, 4</span>
+                }</code>
+        </div>
+    </section>
+
+    <!-- SECTION FONCTIONS -->
+    <section class="section" data-section="fonctions">
+        <h2>🎯 Fonctions</h2>
+
+        <h3>Déclaration de Fonctions</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// Fonction classique</span>
+                <span class="keyword">function</span> <span class="function">saluer</span>(nom) {
+                <span class="keyword">return</span> <span class="string">`Bonjour ${nom}`</span>;
+                }
+
+                <span class="comment">// Expression de fonction</span>
+                <span class="keyword">const</span> <span class="function">additionner</span> = <span class="keyword">function</span>(a, b) {
+                <span class="keyword">return</span> a + b;
+                };
+
+                <span class="comment">// Fonction fléchée (ES6) ⭐</span>
+                <span class="keyword">const</span> <span class="function">multiplier</span> = (a, b) => a * b;
+
+                <span class="comment">// Fonction fléchée avec bloc</span>
+                <span class="keyword">const</span> <span class="function">calculer</span> = (a, b) => {
+                <span class="keyword">const</span> resultat = a + b;
+                <span class="keyword">return</span> resultat * <span class="number">2</span>;
+                };</code>
+        </div>
+
+        <h3>Paramètres par défaut</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="keyword">function</span> <span class="function">saluer</span>(nom = <span class="string">'Invité'</span>) {
+                <span class="keyword">return</span> <span class="string">`Bonjour ${nom}`</span>;
+                }
+
+                saluer(); <span class="comment">// 'Bonjour Invité'</span>
+                saluer(<span class="string">'Alice'</span>); <span class="comment">// 'Bonjour Alice'</span></code>
+        </div>
+
+        <h3>Rest Parameters & Spread</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// Rest parameters (...)</span>
+                <span class="keyword">function</span> <span class="function">somme</span>(...nombres) {
+                <span class="keyword">return</span> nombres.reduce((acc, n) => acc + n, <span class="number">0</span>);
+                }
+                somme(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>); <span class="comment">// 10</span>
+
+                <span class="comment">// Spread operator</span>
+                <span class="keyword">const</span> arr1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];
+                <span class="keyword">const</span> arr2 = [...arr1, <span class="number">4</span>, <span class="number">5</span>]; <span class="comment">// [1, 2, 3, 4, 5]</span></code>
+        </div>
+
+        <h3>Callbacks & Higher Order Functions</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// Fonction qui prend une fonction en paramètre</span>
+                <span class="keyword">function</span> <span class="function">executerOperation</span>(a, b, operation) {
+                <span class="keyword">return</span> operation(a, b);
+                }
+
+                <span class="keyword">const</span> resultat = executerOperation(<span class="number">5</span>, <span class="number">3</span>, (x, y) => x + y);
+                console.log(resultat); <span class="comment">// 8</span></code>
+        </div>
+    </section>
+
+    <!-- SECTION OBJETS & POO -->
+    <section class="section" data-section="objets">
+        <h2>🎨 Objets & POO</h2>
+
+        <h3>Création d'objets</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// Objet littéral</span>
+                <span class="keyword">const</span> personne = {
+                nom: <span class="string">'Alice'</span>,
+                age: <span class="number">30</span>,
+                saluer() {
+                console.log(<span class="string">`Bonjour, je suis ${<span class="keyword">this</span>.nom}`</span>);
+                }
+                };
+
+                <span class="comment">// Accès aux propriétés</span>
+                personne.nom; <span class="comment">// 'Alice'</span>
+                personne[<span class="string">'age'</span>]; <span class="comment">// 30</span></code>
+        </div>
+
+        <h3>Classes (ES6)</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="keyword">class</span> <span class="function">Animal</span> {
+                <span class="function">constructor</span>(nom) {
+                <span class="keyword">this</span>.nom = nom;
+                }
+
+                <span class="function">parler</span>() {
+                console.log(<span class="string">`${<span class="keyword">this</span>.nom} fait du bruit`</span>);
+                }
+                }
+
+                <span class="keyword">class</span> <span class="function">Chien</span> <span class="keyword">extends</span> <span class="function">Animal</span> {
+                <span class="function">constructor</span>(nom, race) {
+                <span class="keyword">super</span>(nom);
+                <span class="keyword">this</span>.race = race;
+                }
+
+                <span class="function">parler</span>() {
+                console.log(<span class="string">`${<span class="keyword">this</span>.nom} aboie`</span>);
+                }
+                }
+
+                <span class="keyword">const</span> chien = <span class="keyword">new</span> Chien(<span class="string">'Rex'</span>, <span class="string">'Labrador'</span>);
+                chien.parler(); <span class="comment">// 'Rex aboie'</span></code>
+        </div>
+
+        <h3>Méthodes d'objets</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="keyword">const</span> obj = { a: <span class="number">1</span>, b: <span class="number">2</span>, c: <span class="number">3</span> };
+
+                <span class="comment">// Object.keys() - retourne les clés</span>
+                Object.keys(obj); <span class="comment">// ['a', 'b', 'c']</span>
+
+                <span class="comment">// Object.values() - retourne les valeurs</span>
+                Object.values(obj); <span class="comment">// [1, 2, 3]</span>
+
+                <span class="comment">// Object.entries() - retourne clés et valeurs</span>
+                Object.entries(obj); <span class="comment">// [['a', 1], ['b', 2], ['c', 3]]</span>
+
+                <span class="comment">// Object.assign() - copie/fusion d'objets</span>
+                <span class="keyword">const</span> copie = Object.assign({}, obj);</code>
+        </div>
+
+        <h3>Spread avec objets</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="keyword">const</span> obj1 = { a: <span class="number">1</span>, b: <span class="number">2</span> };
+                <span class="keyword">const</span> obj2 = { c: <span class="number">3</span>, d: <span class="number">4</span> };
+
+                <span class="comment">// Fusion d'objets</span>
+                <span class="keyword">const</span> fusion = { ...obj1, ...obj2 };
+                <span class="comment">// { a: 1, b: 2, c: 3, d: 4 }</span>
+
+                <span class="comment">// Copie avec modification</span>
+                <span class="keyword">const</span> modifie = { ...obj1, b: <span class="number">10</span> };
+                <span class="comment">// { a: 1, b: 10 }</span></code>
+        </div>
+    </section>
+
+    <!-- SECTION TABLEAUX -->
+    <section class="section" data-section="tableaux">
+        <h2>📊 Tableaux (Arrays)</h2>
+
+        <h3>Méthodes de base</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="keyword">const</span> fruits = [<span class="string">'pomme'</span>, <span class="string">'banane'</span>, <span class="string">'orange'</span>];
+
+                <span class="comment">// Ajouter/retirer</span>
+                fruits.push(<span class="string">'kiwi'</span>); <span class="comment">// Ajoute à la fin</span>
+                fruits.pop(); <span class="comment">// Retire le dernier</span>
+                fruits.unshift(<span class="string">'fraise'</span>); <span class="comment">// Ajoute au début</span>
+                fruits.shift(); <span class="comment">// Retire le premier</span>
+
+                <span class="comment">// Autres méthodes</span>
+                fruits.length; <span class="comment">// Nombre d'éléments</span>
+                fruits.includes(<span class="string">'pomme'</span>); <span class="comment">// true</span>
+                fruits.indexOf(<span class="string">'banane'</span>); <span class="comment">// 1</span></code>
+        </div>
+
+        <h3>map(), filter(), reduce()</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="keyword">const</span> nombres = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];
+
+                <span class="comment">// map() - transforme chaque élément</span>
+                <span class="keyword">const</span> doubles = nombres.map(n => n * <span class="number">2</span>);
+                <span class="comment">// [2, 4, 6, 8, 10]</span>
+
+                <span class="comment">// filter() - filtre les éléments</span>
+                <span class="keyword">const</span> pairs = nombres.filter(n => n % <span class="number">2</span> === <span class="number">0</span>);
+                <span class="comment">// [2, 4]</span>
+
+                <span class="comment">// reduce() - réduit à une seule valeur</span>
+                <span class="keyword">const</span> somme = nombres.reduce((acc, n) => acc + n, <span class="number">0</span>);
+                <span class="comment">// 15</span></code>
+        </div>
+
+        <h3>find(), findIndex(), some(), every()</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="keyword">const</span> users = [
+                { id: <span class="number">1</span>, nom: <span class="string">'Alice'</span>, age: <span class="number">25</span> },
+                { id: <span class="number">2</span>, nom: <span class="string">'Bob'</span>, age: <span class="number">30</span> },
+                { id: <span class="number">3</span>, nom: <span class="string">'Charlie'</span>, age: <span class="number">35</span> }
+                ];
+
+                <span class="comment">// find() - trouve le premier élément</span>
+                <span class="keyword">const</span> user = users.find(u => u.age > <span class="number">28</span>);
+                <span class="comment">// { id: 2, nom: 'Bob', age: 30 }</span>
+
+                <span class="comment">// some() - au moins un élément correspond</span>
+                users.some(u => u.age > <span class="number">30</span>); <span class="comment">// true</span>
+
+                <span class="comment">// every() - tous les éléments correspondent</span>
+                users.every(u => u.age > <span class="number">20</span>); <span class="comment">// true</span></code>
+        </div>
+
+        <h3>sort() & reverse()</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="keyword">const</span> nombres = [<span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">9</span>];
+
+                <span class="comment">// Tri croissant</span>
+                nombres.sort((a, b) => a - b);
+
+                <span class="comment">// Tri décroissant</span>
+                nombres.sort((a, b) => b - a);
+
+                <span class="comment">// Inverser le tableau</span>
+                nombres.reverse();</code>
+        </div>
+    </section>
+
+    <!-- SECTION DOM -->
+    <section class="section" data-section="dom">
+        <h2>🌐 Manipulation du DOM</h2>
+
+        <h3>Sélectionner des éléments</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// Sélection unique</span>
+                <span class="keyword">const</span> element = document.querySelector(<span class="string">'.ma-classe'</span>);
+                <span class="keyword">const</span> elementById = document.getElementById(<span class="string">'mon-id'</span>);
+
+                <span class="comment">// Sélection multiple</span>
+                <span class="keyword">const</span> elements = document.querySelectorAll(<span class="string">'.ma-classe'</span>);
+                <span class="keyword">const</span> elementsByTag = document.getElementsByTagName(<span class="string">'div'</span>);</code>
+        </div>
+
+        <h3>Modifier le contenu</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="keyword">const</span> div = document.querySelector(<span class="string">'div'</span>);
+
+                <span class="comment">// Modifier le texte</span>
+                div.textContent = <span class="string">'Nouveau texte'</span>;
+
+                <span class="comment">// Modifier le HTML</span>
+                div.innerHTML = <span class="string">'&lt;strong&gt;Texte en gras&lt;/strong&gt;'</span>;
+
+                <span class="comment">// Modifier les attributs</span>
+                div.setAttribute(<span class="string">'class'</span>, <span class="string">'nouvelle-classe'</span>);
+                div.id = <span class="string">'mon-id'</span>;</code>
+        </div>
+
+        <h3>Manipuler les classes</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="keyword">const</span> element = document.querySelector(<span class="string">'.box'</span>);
+
+                <span class="comment">// Ajouter une classe</span>
+                element.classList.add(<span class="string">'active'</span>);
+
+                <span class="comment">// Retirer une classe</span>
+                element.classList.remove(<span class="string">'active'</span>);
+
+                <span class="comment">// Basculer une classe</span>
+                element.classList.toggle(<span class="string">'active'</span>);
+
+                <span class="comment">// Vérifier si une classe existe</span>
+                element.classList.contains(<span class="string">'active'</span>); <span class="comment">// true/false</span></code>
+        </div>
+
+        <h3>Créer et ajouter des éléments</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// Créer un élément</span>
+                <span class="keyword">const</span> div = document.createElement(<span class="string">'div'</span>);
+                div.textContent = <span class="string">'Contenu'</span>;
+                div.classList.add(<span class="string">'ma-classe'</span>);
+
+                <span class="comment">// Ajouter à un parent</span>
+                <span class="keyword">const</span> container = document.querySelector(<span class="string">'.container'</span>);
+                container.appendChild(div);
+                container.prepend(div); <span class="comment">// Au début</span>
+
+                <span class="comment">// Supprimer un élément</span>
+                div.remove();</code>
+        </div>
+
+        <h3>Événements</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="keyword">const</span> bouton = document.querySelector(<span class="string">'button'</span>);
+
+                <span class="comment">// Ajouter un événement</span>
+                bouton.addEventListener(<span class="string">'click'</span>, (e) => {
+                console.log(<span class="string">'Cliqué!'</span>);
+                e.preventDefault(); <span class="comment">// Empêcher l'action par défaut</span>
+                e.stopPropagation(); <span class="comment">// Arrêter la propagation</span>
+                });
+
+                <span class="comment">// Événements courants: click, mouseover, mouseout,
+// keydown, keyup, submit, change, input, focus, blur</span></code>
+        </div>
+    </section>
+
+    <!-- SECTION ASYNCHRONE -->
+    <section class="section" data-section="async">
+        <h2>⏱️ Programmation Asynchrone</h2>
+
+        <h3>Callbacks</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// Fonction avec callback</span>
+                <span class="keyword">function</span> <span class="function">chargerDonnees</span>(callback) {
+                setTimeout(() => {
+                <span class="keyword">const</span> donnees = { id: <span class="number">1</span>, nom: <span class="string">'Alice'</span> };
+                callback(donnees);
+                }, <span class="number">1000</span>);
+                }
+
+                chargerDonnees((data) => {
+                console.log(data);
+                });</code>
+        </div>
+
+        <h3>Promises</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// Créer une Promise</span>
+                <span class="keyword">const</span> maPromise = <span class="keyword">new</span> Promise((resolve, reject) => {
+                <span class="keyword">const</span> succes = <span class="keyword">true</span>;
+
+                <span class="keyword">if</span> (succes) {
+                resolve(<span class="string">'Succès!'</span>);
+                } <span class="keyword">else</span> {
+                reject(<span class="string">'Erreur!'</span>);
+                }
+                });
+
+                <span class="comment">// Utiliser une Promise</span>
+                maPromise
+                .then(resultat => console.log(resultat))
+                .catch(erreur => console.error(erreur))
+                .finally(() => console.log(<span class="string">'Terminé'</span>));</code>
+        </div>
+
+        <h3>async / await</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// Fonction asynchrone</span>
+                <span class="keyword">async function</span> <span class="function">chargerDonnees</span>() {
+                <span class="keyword">try</span> {
+                <span class="keyword">const</span> response = <span class="keyword">await</span> fetch(<span class="string">'https://api.example.com/data'</span>);
+                <span class="keyword">const</span> data = <span class="keyword">await</span> response.json();
+                <span class="keyword">return</span> data;
+                } <span class="keyword">catch</span> (erreur) {
+                console.error(<span class="string">'Erreur:'</span>, erreur);
+                }
+                }
+
+                <span class="comment">// Utilisation</span>
+                chargerDonnees().then(data => console.log(data));</code>
+        </div>
+
+        <h3>Fetch API</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// GET request</span>
+                fetch(<span class="string">'https://api.example.com/users'</span>)
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error(error));
+
+                <span class="comment">// POST request</span>
+                fetch(<span class="string">'https://api.example.com/users'</span>, {
+                method: <span class="string">'POST'</span>,
+                headers: {
+                <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span>
+                },
+                body: JSON.stringify({ nom: <span class="string">'Alice'</span>, age: <span class="number">25</span> })
+                })
+                .then(response => response.json())
+                .then(data => console.log(data));</code>
+        </div>
+    </section>
+
+    <!-- SECTION MODULES -->
+    <section class="section" data-section="modules">
+        <h2>📦 Modules ES6</h2>
+
+        <h3>Export</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// Export nommé</span>
+                <span class="keyword">export const</span> PI = <span class="number">3.14159</span>;
+                <span class="keyword">export function</span> <span class="function">additionner</span>(a, b) {
+                <span class="keyword">return</span> a + b;
+                }
+
+                <span class="comment">// Export par défaut</span>
+                <span class="keyword">export default function</span> <span class="function">multiplier</span>(a, b) {
+                <span class="keyword">return</span> a * b;
+                }</code>
+        </div>
+
+        <h3>Import</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// Import nommé</span>
+                <span class="keyword">import</span> { PI, additionner } <span class="keyword">from</span> <span class="string">'./math.js'</span>;
+
+                <span class="comment">// Import par défaut</span>
+                <span class="keyword">import</span> multiplier <span class="keyword">from</span> <span class="string">'./math.js'</span>;
+
+                <span class="comment">// Import avec alias</span>
+                <span class="keyword">import</span> { additionner <span class="keyword">as</span> add } <span class="keyword">from</span> <span class="string">'./math.js'</span>;
+
+                <span class="comment">// Import tout</span>
+                <span class="keyword">import</span> * <span class="keyword">as</span> Math <span class="keyword">from</span> <span class="string">'./math.js'</span>;</code>
+        </div>
+    </section>
+
+    <!-- SECTION ES6+ FEATURES -->
+    <section class="section" data-section="es6">
+        <h2>✨ Fonctionnalités ES6+</h2>
+
+        <h3>Sets & Maps</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// Set - collection de valeurs uniques</span>
+                <span class="keyword">const</span> monSet = <span class="keyword">new</span> Set([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>]);
+                console.log(monSet); <span class="comment">// Set { 1, 2, 3 }</span>
+                monSet.add(<span class="number">4</span>);
+                monSet.has(<span class="number">2</span>); <span class="comment">// true</span>
+                monSet.delete(<span class="number">1</span>);
+
+                <span class="comment">// Map - collection clé-valeur</span>
+                <span class="keyword">const</span> maMap = <span class="keyword">new</span> Map();
+                maMap.set(<span class="string">'nom'</span>, <span class="string">'Alice'</span>);
+                maMap.set(<span class="string">'age'</span>, <span class="number">30</span>);
+                maMap.get(<span class="string">'nom'</span>); <span class="comment">// 'Alice'</span>
+                maMap.has(<span class="string">'age'</span>); <span class="comment">// true</span></code>
+        </div>
+
+        <h3>Symbols</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// Créer un Symbol unique</span>
+                <span class="keyword">const</span> id = Symbol(<span class="string">'id'</span>);
+                <span class="keyword">const</span> id2 = Symbol(<span class="string">'id'</span>);
+
+                console.log(id === id2); <span class="comment">// false</span>
+
+                <span class="comment">// Utilisation comme clé d'objet</span>
+                <span class="keyword">const</span> user = {
+                nom: <span class="string">'Alice'</span>,
+                [id]: <span class="number">123</span>
+                };</code>
+        </div>
+
+        <h3>Generators</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// Fonction génératrice</span>
+                <span class="keyword">function*</span> <span class="function">compter</span>() {
+                <span class="keyword">yield</span> <span class="number">1</span>;
+                <span class="keyword">yield</span> <span class="number">2</span>;
+                <span class="keyword">yield</span> <span class="number">3</span>;
+                }
+
+                <span class="keyword">const</span> compteur = compter();
+                console.log(compteur.next().value); <span class="comment">// 1</span>
+                console.log(compteur.next().value); <span class="comment">// 2</span>
+                console.log(compteur.next().value); <span class="comment">// 3</span></code>
+        </div>
+
+        <h3>Proxy</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+            <code><span class="comment">// Intercepter les opérations sur un objet</span>
+                <span class="keyword">const</span> handler = {
+                get(target, prop) {
+                console.log(<span class="string">`Accès à ${prop}`</span>);
+                <span class="keyword">return</span> target[prop];
+                }
+                };
+
+                <span class="keyword">const</span> obj = { nom: <span class="string">'Alice'</span> };
+                <span class="keyword">const</span> proxy = <span class="keyword">new</span> Proxy(obj, handler);
+
+                proxy.nom; <span class="comment">// Log: "Accès à nom", retourne "Alice"</span></code>
+        </div>
+
+        <div class="note">
+            <strong>💡 Ressources supplémentaires :</strong>
+            <ul>
+                <li>MDN Web Docs - Documentation complète</li>
+                <li>JavaScript.info - Tutoriels détaillés</li>
+                <li>ES6 Features - Liste complète des nouvelles fonctionnalités</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <p>📚 Aide-Mémoire JavaScript ES6+ - 2024</p>
+        <p>Créé par Mourad Sehboub pour faciliter l'apprentissage de JavaScript moderne</p>
+    </footer>
+</div>
+
+<script>
+    // Gestion de la navigation par catégories
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    const sections = document.querySelectorAll('.section');
+
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const category = button.dataset.category;
+
+            // Mise à jour des boutons actifs
+            categoryButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            // Affichage de la section correspondante
+            sections.forEach(section => {
+                if (section.dataset.section === category) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+
+            // Scroll vers le haut
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+
+    // Fonction de recherche
+    const searchInput = document.getElementById('searchInput');
+
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+
+        if (searchTerm === '') {
+            // Réafficher la section active actuelle
+            return;
+        }
+
+        sections.forEach(section => {
+            const content = section.textContent.toLowerCase();
+
+            if (content.includes(searchTerm)) {
+                section.classList.add('active');
+            } else {
+                section.classList.remove('active');
+            }
+        });
+    });
+
+    // Fonction pour copier le code
+    function copyCode(button) {
+        const codeBlock = button.nextElementSibling;
+        const code = codeBlock.textContent;
+
+        navigator.clipboard.writeText(code).then(() => {
+            const originalText = button.textContent;
+            button.textContent = '✓ Copié!';
+            button.classList.add('copied');
+
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.classList.remove('copied');
+            }, 2000);
+        }).catch(err => {
+            console.error('Erreur de copie:', err);
+            button.textContent = '❌ Erreur';
+            setTimeout(() => {
+                button.textContent = 'Copier';
+            }, 2000);
+        });
+    }
+</script>
+</body>
+</html>
