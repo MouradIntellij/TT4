@@ -114,6 +114,40 @@
             display: block;
         }
 
+        .exercice {
+            position: relative;
+        }
+
+        .toggle-solution-btn {
+            margin-top: 15px;
+            background: #36d530;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .toggle-solution-btn:hover {
+            background: #2bbd28;
+            transform: translateY(-1px);
+        }
+
+        /* Solution cachée */
+        .solution {
+            margin-top: 20px;
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        /* Solution visible */
+        .solution.active {
+            display: block;
+        }
+
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -138,6 +172,13 @@
             margin-top: 25px;
             margin-bottom: 15px;
             font-size: 1.4em;
+        }
+
+        .section h4 {
+            color: #36d530;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1em;
         }
 
         .code-block {
@@ -293,6 +334,8 @@
         <button class="category-btn" data-category="async">Asynchrone</button>
         <button class="category-btn" data-category="modules">Modules</button>
         <button class="category-btn" data-category="es6">ES6+ Features</button>
+        <button class="category-btn" data-category="exercices">Exercices</button>
+        
     </div>
 
     <!-- SECTION VARIABLES -->
@@ -1120,15 +1163,570 @@
         <div class="note">
             <strong>💡 Ressources supplémentaires :</strong>
             <ul>
-                <li>MDN Web Docs - Documentation complète</li>
-                <li>JavaScript.info - Tutoriels détaillés</li>
-                <li>ES6 Features - Liste complète des nouvelles fonctionnalités</li>
+                <li><a href="https://developer.mozilla.org/fr/docs/Web/JavaScript" target="_blank">▶ MDN Web Docs - Documentation complète</a></li>
+                <li><a href="https://fr.javascript.info/" target="_blank">▶ JavaScript.info - Tutoriels détaillés</a></li>
+                <li><a href="https://hackmd.io/3SR9nzpWQg2aulvm08eU7g" target="_blank">▶ ES6 Features - Liste complète des nouvelles fonctionnalités</a></li>
             </ul>
         </div>
     </section>
 
+
+
+    <section class="section" data-section="exercices">
+        <h2>✨ Exercices : Le Parcours du Développeur JS Moderne</h2>
+        <p style="color: white; margin-bottom: 20px;">Maîtrisez les concepts clés pour réussir votre transition vers React, Node.js et Express.</p>
+
+        <h3>1. La Forge des Variables (Fondamentaux)</h3>
+        <div class="note exercice">
+            <h4>🛠️ Exercice 1 : Maîtriser const, let et les templates literals</h4>
+            <ul>
+                <li>Créez une fonction <code>genererProfil(prenom, nom, age)</code>.</li>
+                <li>Utilisez <code>const</code> pour stocker le nom complet.</li>
+                <li>Retournez une phrase via les <strong>Template Literals</strong>.</li>
+                <li>Ajoutez "Je suis majeur" si l'âge est supérieur ou égal à 18.</li>
+            </ul>
+
+            <button class="toggle-solution-btn" onclick="toggleSolution(this)" disabled>
+                👁️ Voir le corrigé
+            </button>
+
+            <div class="solution">
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                    <code>
+                        const genererProfil = (prenom, nom, age) => {
+                        const nomComplet = `${prenom} ${nom}`;
+                        const statut = age >= 18 ? " Je suis majeur." : " Je suis mineur.";
+                        return `Je m'appelle ${nomComplet} et j'ai ${age} ans.${statut}`;
+                        };
+
+                        // Test
+                        console.log(genererProfil("Marie", "Dupont", 22));
+                        // "Je m'appelle Marie Dupont et j'ai 22 ans. Je suis majeur."
+                    </code>
+                </div>
+            </div>
+        </div>
+
+        <h3>2. Le Filtre de Données (Tableaux ES6)</h3>
+        <div class="note exercice">
+            <h4>🛠️ Exercice 2 : Transformation de listes (Pré-requis React)</h4>
+            <ul>
+                <li>Soit <code>utilisateurs = [{nom: 'Alice', active: true}, {nom: 'Bob', active: false}, {nom: 'Clara', active: true}]</code>.</li>
+                <li>Utilisez <code>filter()</code> pour ne garder que les actifs.</li>
+                <li>Utilisez <code>map()</code> pour créer un tableau contenant uniquement les noms des utilisateurs actifs.</li>
+                <li>Bonus : Faites tout en une seule chaîne de méthodes (method chaining).</li>
+            </ul>
+
+            <button class="toggle-solution-btn" onclick="toggleSolution(this)" disabled>
+                👁️ Voir le corrigé
+            </button>
+
+            <div class="solution">
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                    <code>
+                        const utilisateurs = [
+                        {nom: 'Alice', active: true},
+                        {nom: 'Bob', active: false},
+                        {nom: 'Clara', active: true}
+                        ];
+
+                        const nomsActifs = utilisateurs
+                        .filter(u => u.active)
+                        .map(u => u.nom);
+
+                        console.log(nomsActifs); // ["Alice", "Clara"]
+                    </code>
+                </div>
+            </div>
+        </div>
+
+        <h3>3. L'Expert de la Déstructuration</h3>
+        <div class="note exercice">
+            <h4>🛠️ Exercice 3 : Extraction de données (Props & Config)</h4>
+            <ul>
+                <li>Soit l'objet <code>config = { vitesse: 120, options: { son: true, volume: 75 } }</code>.</li>
+                <li>Extrayez <code>vitesse</code>, <code>son</code> et <code>volume</code> en utilisant la déstructuration.</li>
+                <li>Donnez une valeur par défaut de 100 à la vitesse et 50 au volume.</li>
+            </ul>
+
+            <button class="toggle-solution-btn" onclick="toggleSolution(this)" disabled>
+                👁️ Voir le corrigé
+            </button>
+
+            <div class="solution">
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                    <code>
+                        const config = {
+                        vitesse: 120,
+                        options: { son: true, volume: 75 }
+                        };
+
+                        const {
+                        vitesse = 100,
+                        options: { son, volume = 50 }
+                        } = config;
+
+                        console.log(vitesse, son, volume); // 120 true 75
+
+                        // Avec un objet incomplet
+                        const configPartiel = { options: { son: false } };
+                        const {
+                        vitesse: v = 100,
+                        options: { son: s, volume: vol = 50 }
+                        } = configPartiel;
+
+                        console.log(v, s, vol); // 100 false 50
+                    </code>
+                </div>
+            </div>
+        </div>
+
+        <h3>4. Le Maître du Temps (Asynchrone)</h3>
+        <div class="note exercice">
+            <h4>🛠️ Exercice 4 : Promesses et Async/Await</h4>
+            <ul>
+                <li>Créez une fonction <code>attendre(ms)</code> qui retourne une Promise résolue après X millisecondes.</li>
+                <li>Créez une fonction <code>lancer()</code> asynchrone qui attend 2 secondes avant d'afficher "Chargement terminé".</li>
+                <li>Bonus : Gérez les erreurs avec try/catch.</li>
+            </ul>
+
+            <button class="toggle-solution-btn" onclick="toggleSolution(this)" disabled>
+                👁️ Voir le corrigé
+            </button>
+
+            <div class="solution">
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                    <code>
+                        const attendre = (ms) => {
+                        return new Promise(resolve => setTimeout(resolve, ms));
+                        };
+
+                        async function lancer() {
+                        try {
+                        console.log("Démarrage...");
+                        await attendre(2000);
+                        console.log("Chargement terminé");
+                        } catch (error) {
+                        console.error("Erreur:", error);
+                        }
+                        }
+
+                        // Test
+                        lancer();
+                    </code>
+                </div>
+            </div>
+        </div>
+
+        <h3>5. Immuabilité (État React)</h3>
+        <div class="note exercice">
+            <h4>🛠️ Exercice 5 : Mise à jour de tableau sans mutation</h4>
+            <ul>
+                <li>Soit <code>items = ['Pomme', 'Banane']</code>.</li>
+                <li>Créez <code>nouveauxItems</code> en ajoutant 'Orange' <strong>sans utiliser push()</strong>.</li>
+                <li>Créez <code>itemsSansDeuxieme</code> en retirant le 2ème élément sans utiliser splice().</li>
+                <li>Utilisez l'opérateur <strong>Spread (...)</strong> et les méthodes immutables.</li>
+            </ul>
+
+            <button class="toggle-solution-btn" onclick="toggleSolution(this)" disabled>
+                👁️ Voir le corrigé
+            </button>
+
+            <div class="solution">
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                    <code>
+                        const items = ['Pomme', 'Banane'];
+
+                        // Ajouter un élément (spread)
+                        const nouveauxItems = [...items, 'Orange'];
+                        console.log(nouveauxItems); // ["Pomme", "Banane", "Orange"]
+
+                        // Retirer le 2ème élément (filter)
+                        const itemsSansDeuxieme = items.filter((_, index) => index !== 1);
+                        console.log(itemsSansDeuxieme); // ["Pomme"]
+
+                        // Modifier un élément à l'index 0
+                        const itemsModifies = items.map((item, index) =>
+                        index === 0 ? 'Mangue' : item
+                        );
+                        console.log(itemsModifies); // ["Mangue", "Banane"]
+
+                        // Vérifier que l'original n'a pas changé
+                        console.log(items); // ["Pomme", "Banane"]
+                    </code>
+                </div>
+            </div>
+        </div>
+
+        <h3>6. Sécurité des Données (Optional Chaining)</h3>
+        <div class="note exercice">
+            <h4>🛠️ Exercice 6 : Éviter les erreurs de lecture API</h4>
+            <ul>
+                <li>Tentez de lire <code>user.profile.bio</code> où <code>profile</code> peut être absent.</li>
+                <li>Si <code>profile</code> est absent, la variable doit être <code>undefined</code> (pas d'erreur).</li>
+                <li>Si le résultat est nul ou undefined, affichez "Pas de bio" (Nullish coalescing <code>??</code>).</li>
+            </ul>
+
+            <button class="toggle-solution-btn" onclick="toggleSolution(this)" disabled>
+                👁️ Voir le corrigé
+            </button>
+
+            <div class="solution">
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                    <code>
+                        // Cas 1 : profile existe avec bio
+                        const user1 = {
+                        profile: { bio: "Développeur passionné" }
+                        };
+                        const bio1 = user1?.profile?.bio ?? "Pas de bio";
+                        console.log(bio1); // "Développeur passionné"
+
+                        // Cas 2 : profile existe mais bio est null
+                        const user2 = {
+                        profile: { bio: null }
+                        };
+                        const bio2 = user2?.profile?.bio ?? "Pas de bio";
+                        console.log(bio2); // "Pas de bio"
+
+                        // Cas 3 : profile n'existe pas
+                        const user3 = { name: "Alice" };
+                        const bio3 = user3?.profile?.bio ?? "Pas de bio";
+                        console.log(bio3); // "Pas de bio"
+
+                        // Cas 4 : user n'existe pas
+                        const user4 = null;
+                        const bio4 = user4?.profile?.bio ?? "Pas de bio";
+                        console.log(bio4); // "Pas de bio"
+                    </code>
+                </div>
+            </div>
+        </div>
+
+        <h3>7. Performance (Promises en parallèle)</h3>
+        <div class="note exercice">
+            <h4>🛠️ Exercice 7 : Optimiser les appels serveurs</h4>
+            <ul>
+                <li>Simulez deux appels API : <code>getUsers()</code> et <code>getStats()</code> qui prennent chacun 1 seconde.</li>
+                <li>Lancez-les en parallèle avec <code>Promise.all()</code>.</li>
+                <li>Comparez avec une exécution séquentielle (await l'un après l'autre).</li>
+            </ul>
+
+            <button class="toggle-solution-btn" onclick="toggleSolution(this)" disabled>
+                👁️ Voir le corrigé
+            </button>
+
+            <div class="solution">
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                    <code>
+                        // Simulation d'API
+                        const getUsers = () => new Promise(resolve =>
+                        setTimeout(() => resolve(['Alice', 'Bob']), 1000)
+                        );
+
+                        const getStats = () => new Promise(resolve =>
+                        setTimeout(() => resolve({ total: 42 }), 1000)
+                        );
+
+                        // ❌ Séquentiel (2 secondes au total)
+                        async function loadDataSequentiel() {
+                        console.time('Sequential');
+                        const users = await getUsers();
+                        const stats = await getStats();
+                        console.timeEnd('Sequential'); // ~2000ms
+                        return { users, stats };
+                        }
+
+                        // ✅ Parallèle (1 seconde au total)
+                        async function loadDataParallele() {
+                        console.time('Parallel');
+                        const [users, stats] = await Promise.all([
+                        getUsers(),
+                        getStats()
+                        ]);
+                        console.timeEnd('Parallel'); // ~1000ms
+                        return { users, stats };
+                        }
+
+                        // Test
+                        loadDataParallele().then(data => console.log(data));
+                    </code>
+                </div>
+            </div>
+        </div>
+
+        <h3>8. Logique Avancée (Reduce)</h3>
+        <div class="note exercice">
+            <h4>🛠️ Exercice 8 : Calcul de panier (Logique métier)</h4>
+            <ul>
+                <li>Soit <code>panier = [{nom: 'Livre', prix: 10, qte: 2}, {nom: 'Stylo', prix: 5, qte: 3}]</code>.</li>
+                <li>Calculez le total du panier (prix × quantité) en utilisant <code>reduce()</code>.</li>
+                <li>Bonus : Comptez le nombre total d'articles.</li>
+            </ul>
+
+            <button class="toggle-solution-btn" onclick="toggleSolution(this)" disabled>
+                👁️ Voir le corrigé
+            </button>
+
+            <div class="solution">
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                    <code>
+                        const panier = [
+                        {nom: 'Livre', prix: 10, qte: 2},
+                        {nom: 'Stylo', prix: 5, qte: 3},
+                        {nom: 'Cahier', prix: 3, qte: 5}
+                        ];
+
+                        // Total du panier
+                        const total = panier.reduce((acc, item) =>
+                        acc + (item.prix * item.qte), 0
+                        );
+                        console.log(`Total: ${total}$`); // Total: 50$
+
+                        // Nombre total d'articles
+                        const totalArticles = panier.reduce((acc, item) =>
+                        acc + item.qte, 0
+                        );
+                        console.log(`Articles: ${totalArticles}`); // Articles: 10
+
+                        // Créer un résumé
+                        const resume = panier.reduce((acc, item) => {
+                        acc.total += item.prix * item.qte;
+                        acc.articles += item.qte;
+                        return acc;
+                        }, { total: 0, articles: 0 });
+
+                        console.log(resume); // { total: 50, articles: 10 }
+                    </code>
+                </div>
+            </div>
+        </div>
+
+        <h3>9. Modules ES6 (Import/Export)</h3>
+        <div class="note exercice">
+            <h4>🛠️ Exercice 9 : Organisation du code (Node.js/React)</h4>
+            <ul>
+                <li>Créez un fichier <code>utils.js</code> qui exporte une fonction <code>calculerTVA(prix, taux = 0.15)</code>.</li>
+                <li>Exportez également une constante <code>TVA_DEFAUT = 0.15</code>.</li>
+                <li>Importez et utilisez ces exports dans votre code principal.</li>
+            </ul>
+
+            <button class="toggle-solution-btn" onclick="toggleSolution(this)" disabled>
+                👁️ Voir le corrigé
+            </button>
+
+            <div class="solution">
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                    <code>
+                        // ========== utils.js ==========
+                        export const TVA_DEFAUT = 0.15;
+
+                        export const calculerTVA = (prix, taux = TVA_DEFAUT) => {
+                        return prix * (1 + taux);
+                        };
+
+                        export const formaterPrix = (prix) => {
+                        return `${prix.toFixed(2)}$`;
+                        };
+
+                        // Export par défaut
+                        export default {
+                        calculerTVA,
+                        formaterPrix,
+                        TVA_DEFAUT
+                        };
+
+                        // ========== main.js ==========
+                        // Import nommé
+                        import { calculerTVA, TVA_DEFAUT, formaterPrix } from './utils.js';
+
+                        const prixHT = 100;
+                        const prixTTC = calculerTVA(prixHT);
+                        console.log(formaterPrix(prixTTC)); // "115.00$"
+
+                        // Ou import par défaut
+                        import utils from './utils.js';
+                        console.log(utils.calculerTVA(100)); // 115
+                    </code>
+                </div>
+            </div>
+        </div>
+
+        <h3>10. Gestion d'Objets Complexes (Spread & Rest)</h3>
+        <div class="note exercice">
+            <h4>🛠️ Exercice 10 : Fusion et extraction de propriétés</h4>
+            <ul>
+                <li>Soit deux objets : <code>user = {nom: 'Alice', age: 25}</code> et <code>contact = {email: 'alice@ex.com', tel: '555-0100'}</code>.</li>
+                <li>Fusionnez-les dans un nouvel objet <code>profil</code> sans modifier les originaux.</li>
+                <li>Créez une fonction qui accepte un objet et extrait <code>nom</code> tout en gardant le reste dans une variable <code>autresInfos</code>.</li>
+            </ul>
+
+            <button class="toggle-solution-btn" onclick="toggleSolution(this)" disabled>
+                👁️ Voir le corrigé
+            </button>
+
+            <div class="solution">
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                    <code>
+                        const user = { nom: 'Alice', age: 25 };
+                        const contact = { email: 'alice@ex.com', tel: '555-0100' };
+
+                        // Fusion avec spread
+                        const profil = { ...user, ...contact };
+                        console.log(profil);
+                        // { nom: 'Alice', age: 25, email: 'alice@ex.com', tel: '555-0100' }
+
+                        // Fonction avec rest operator
+                        const extraireNom = (obj) => {
+                        const { nom, ...autresInfos } = obj;
+                        return { nom, autresInfos };
+                        };
+
+                        const resultat = extraireNom(profil);
+                        console.log(resultat);
+                        // { nom: 'Alice', autresInfos: { age: 25, email: '...', tel: '...' } }
+
+                        // Mise à jour immutable d'une propriété
+                        const profilMisAJour = { ...profil, age: 26 };
+                        console.log(profil.age); // 25 (non muté)
+                        console.log(profilMisAJour.age); // 26
+                    </code>
+                </div>
+            </div>
+        </div>
+
+        <h3>11. Fetch API et Gestion d'Erreurs</h3>
+        <div class="note exercice">
+            <h4>🛠️ Exercice 11 : Appel API réaliste (Node.js/React)</h4>
+            <ul>
+                <li>Créez une fonction <code>fetchUser(id)</code> qui appelle <code>https://jsonplaceholder.typicode.com/users/{id}</code>.</li>
+                <li>Gérez les erreurs réseau et HTTP (404, 500, etc.).</li>
+                <li>Retournez les données ou <code>null</code> en cas d'erreur.</li>
+            </ul>
+
+            <button class="toggle-solution-btn" onclick="toggleSolution(this)" disabled>
+                👁️ Voir le corrigé
+            </button>
+
+            <div class="solution">
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                    <code>
+                        const fetchUser = async (id) => {
+                        try {
+                        const response = await fetch(
+                        `https://jsonplaceholder.typicode.com/users/${id}`
+                        );
+
+                        // Vérifier le statut HTTP
+                        if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                        }
+
+                        const data = await response.json();
+                        return data;
+
+                        } catch (error) {
+                        console.error("Erreur lors du fetch:", error.message);
+                        return null;
+                        }
+                        };
+
+                        // Test
+                        const chargerUtilisateur = async () => {
+                        const user = await fetchUser(1);
+
+                        if (user) {
+                        console.log(`Utilisateur: ${user.name} (${user.email})`);
+                        } else {
+                        console.log("Impossible de charger l'utilisateur");
+                        }
+                        };
+
+                        chargerUtilisateur();
+                    </code>
+                </div>
+            </div>
+        </div>
+
+        <h3>12. Classes ES6 (POO Moderne)</h3>
+        <div class="note exercice">
+            <h4>🛠️ Exercice 12 : Programmation orientée objet</h4>
+            <ul>
+                <li>Créez une classe <code>Produit</code> avec un constructeur prenant <code>nom</code> et <code>prix</code>.</li>
+                <li>Ajoutez une méthode <code>afficherInfo()</code> qui retourne une description.</li>
+                <li>Créez une classe <code>ProduitEnSolde</code> qui hérite de <code>Produit</code> et ajoute une propriété <code>rabais</code>.</li>
+                <li>Surchargez <code>afficherInfo()</code> pour inclure le prix soldé.</li>
+            </ul>
+
+            <button class="toggle-solution-btn" onclick="toggleSolution(this)"  disabled>
+                👁️ Voir le corrigé
+            </button>
+
+            <div class="solution">
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+                    <code>
+                        class Produit {
+                        constructor(nom, prix) {
+                        this.nom = nom;
+                        this.prix = prix;
+                        }
+
+                        afficherInfo() {
+                        return `${this.nom} - ${this.prix}$`;
+                        }
+
+                        // Méthode statique
+                        static comparer(p1, p2) {
+                        return p1.prix - p2.prix;
+                        }
+                        }
+
+                        class ProduitEnSolde extends Produit {
+                        constructor(nom, prix, rabais) {
+                        super(nom, prix);
+                        this.rabais = rabais;
+                        }
+
+                        get prixSolde() {
+                        return this.prix * (1 - this.rabais);
+                        }
+
+                        afficherInfo() {
+                        return `${super.afficherInfo()} → ${this.prixSolde.toFixed(2)}$ (-${this.rabais * 100}%)`;
+                        }
+                        }
+
+                        // Tests
+                        const produit1 = new Produit("Clavier", 50);
+                        const produit2 = new ProduitEnSolde("Souris", 30, 0.2);
+
+                        console.log(produit1.afficherInfo()); // "Clavier - 50$"
+                        console.log(produit2.afficherInfo()); // "Souris - 30$ → 24.00$ (-20%)"
+                        console.log(Produit.comparer(produit1, produit2)); // 20
+                    </code>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+
+
+
     <footer>
-        <p>📚 Aide-Mémoire JavaScript ES6+ - 2024</p>
+        <p>📚 Aide-Mémoire JavaScript ES6+ - 2026</p>
         <p>Créé par Mourad Sehboub pour faciliter l'apprentissage de JavaScript moderne</p>
     </footer>
 </div>
@@ -1204,6 +1802,21 @@
             }, 2000);
         });
     }
+
+    //Fonction pour afficher le corrigé de l'exercice actuel
+    function toggleSolution(button) {
+        const solution = button.nextElementSibling;
+
+        solution.classList.toggle('active');
+
+        if (solution.classList.contains('active')) {
+            button.textContent = '🙈 Masquer le corrigé';
+        } else {
+            button.textContent = '👁️ Voir le corrigé';
+        }
+    }
+
+
 </script>
 </body>
 </html>
