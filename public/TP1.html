@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP1 - Maîtrisez les tableaux en JavaScript</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .exercise-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        .exercise-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .exercise-card p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #999;
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .modal-content h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-right: 40px;
+        }
+
+        pre {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+            color: #333;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section h4 {
+            color: #764ba2;
+            margin: 15px 0 10px 0;
+            font-size: 1.1rem;
+        }
+
+        .output {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .partie-title {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .partie-title h2 {
+            color: #764ba2;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📚 TP1 : Maîtrisez les tableaux en JavaScript</h1>
+
+    <div class="partie-title">
+        <h2>PARTIE 1 : Tableaux de valeurs primitives</h2>
+    </div>
+
+    <div class="grid">
+        <!-- Exercice 1 -->
+        <div class="exercise-card" onclick="showExercise(1)">
+            <h3>Exercice 1</h3>
+            <p><strong>Déclaration et accès aux éléments d'un tableau</strong></p>
+            <p>
+                1. Déclarer un tableau <em>technologies</em> contenant :<br>
+                "JavaScript", "HTML", "CSS", "React"
+            </p>
+            <p>2. Afficher :</p>
+            <ul>
+                <li>le premier élément</li>
+                <li>le dernier élément (en utilisant <code>length</code>)</li>
+            </ul>
+            <p>
+                3. Remplacer "CSS" par "CSS3"<br>
+                4. Afficher le tableau final
+            </p>
+        </div>
+
+        <!-- Exercice 2 -->
+        <div class="exercise-card" onclick="showExercise(2)">
+            <h3>Exercice 2</h3>
+            <p><strong>Vérification et longueur</strong></p>
+            <p>
+                1. Vérifier si <em>technologies</em> est un tableau (2 méthodes)<br>
+                2. Afficher la longueur du tableau<br>
+                3. Ajouter "NodeJS" à la fin du tableau
+            </p>
+        </div>
+
+        <!-- Exercice 3 -->
+        <div class="exercise-card" onclick="showExercise(3)">
+            <h3>Exercice 3</h3>
+            <p><strong>Parcours du tableau</strong></p>
+            <p>1. Parcourir le tableau avec :</p>
+            <ul>
+                <li>une boucle for</li>
+                <li>une méthode forEach</li>
+            </ul>
+            <p>2. Afficher l’index et la valeur à chaque itération</p>
+        </div>
+
+        <!-- Exercice 4 -->
+        <div class="exercise-card" onclick="showExercise(4)">
+            <h3>Exercice 4</h3>
+            <p><strong>Manipulation numérique</strong></p>
+            <p>
+                Soit le tableau : <code>let notes = [10, 12, 15, 8, 18, 6];</code><br>
+                1. Filtrer les notes supérieures ou égales à 10<br>
+                2. Créer un nouveau tableau contenant le carré des notes filtrées<br>
+                3. Calculer la somme des carrés obtenus<br>
+                4. Afficher tous les tableaux intermédiaires
+            </p>
+        </div>
+
+        <!-- Exercice 5 -->
+        <div class="exercise-card" onclick="showExercise(5)">
+            <h3>Exercice 5</h3>
+            <p><strong>Ajout, suppression et modification</strong></p>
+            <p>
+                Soit le tableau : <code>let numbers = [1, 2, 3, 4, 5];</code><br>
+                1. Ajouter 6 et 7 à la fin du tableau<br>
+                2. Supprimer le dernier élément<br>
+                3. Supprimer le premier élément<br>
+                4. Remplacer 3 par 10, 11 et 12<br>
+                5. Créer une copie du tableau<br>
+                6. Extraire les éléments à partir de l’indice 2
+            </p>
+        </div>
+    </div>
+
+    <div class="partie-title">
+        <h2>PARTIE 2 : Tableaux de valeurs composées</h2>
+    </div>
+
+    <div class="grid">
+        <!-- Exercice 6 -->
+        <div class="exercise-card" onclick="showExercise(6)">
+            <h3>Exercice 6</h3>
+            <p><strong>Tableau d’objets - Étudiants</strong></p>
+            <p>
+                Soit le tableau :<br>
+                <code>let students = [
+                    { nom: "Ali", note: 12 },
+                    { nom: "Sara", note: 9 },
+                    { nom: "Omar", note: 15 },
+                    { nom: "Lina", note: 18 }
+                    ];</code>
+            </p>
+            <ul>
+                <li>Afficher le nom et la note de chaque étudiant</li>
+                <li>Filtrer les étudiants ayant une note ≥ 10</li>
+                <li>Créer un tableau contenant uniquement les noms des étudiants admis</li>
+                <li>Calculer la moyenne des notes</li>
+                <li>Vérifier si <em>students</em> est bien un tableau</li>
+            </ul>
+        </div>
+
+        <!-- Exercice 7 -->
+        <div class="exercise-card" onclick="showExercise(7)">
+            <h3>Exercice 7</h3>
+            <p><strong>Modification d’objets dans un tableau</strong></p>
+            <ul>
+                <li>Ajouter un nouvel étudiant</li>
+                <li>Supprimer le dernier étudiant</li>
+                <li>Modifier la note de "Sara" pour qu’elle devienne 11</li>
+                <li>Afficher le tableau après chaque opération</li>
+            </ul>
+        </div>
+
+        <!-- Exercice 8 -->
+        <div class="exercise-card" onclick="showExercise(8)">
+            <h3>Exercice 8</h3>
+            <p><strong>Tableau contenant des tableaux</strong></p>
+            <p>
+                Soit le tableau :<br>
+                <code>let classes = [
+                    ["Ali", "Sara", "Omar"],
+                    ["Lina", "Yassine"],
+                    ["Amine", "Noor", "Salma"]
+                    ];</code>
+            </p>
+            <ul>
+                <li>Afficher tous les noms en utilisant des boucles imbriquées</li>
+                <li>Compter le nombre total d’étudiants</li>
+                <li>Ajouter un étudiant à la deuxième classe</li>
+                <li>Créer un tableau contenant uniquement les classes ayant plus de 2 étudiants</li>
+                <li>Pourquoi privilégier les crochets [] à <code>new Array()</code> ?</li>
+                <li>Trier les étudiants par note</li>
+                <li>Trouver la meilleure note</li>
+                <li>Ajouter une validation des données</li>
+            </ul>
+        </div>
+
+        <!-- Exercice 9 -->
+        <div class="exercise-card" onclick="showExercise(9)">
+            <h3>Exercice 9</h3>
+            <p><strong>Synthèse finale - Gestion de produits</strong></p>
+            <p>Créer un programme qui :</p>
+            <ul>
+                <li>Stocke plusieurs produits dans un tableau d’objets (nom, prix)</li>
+                <li>Filtre les produits dont le prix est ≥ 100</li>
+                <li>Applique une réduction de 10% sur ces produits</li>
+                <li>Calcule le prix total après réduction</li>
+                <li>Affiche :
+                    <ul>
+                        <li>le tableau initial</li>
+                        <li>le tableau filtré</li>
+                        <li>le tableau modifié</li>
+                        <li>le total final</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Questions de réflexion -->
+        <div class="exercise-card" onclick="showExercise('reflexion')">
+            <h3>Questions de Réflexion</h3>
+            <ul>
+                <li>Quelle est la différence entre <code>map()</code> et <code>forEach()</code> ?</li>
+                <li>Pourquoi <code>slice()</code> ne modifie pas le tableau original ?</li>
+                <li>Dans quels cas utiliser <code>reduce()</code> ?</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal()">&times;</button>
+        <div id="modal-body"></div>
+    </div>
+</div>
+
+<script>
+    const exercises = {
+        1: {
+            title: "Exercice 1 – Déclaration et accès",
+            code: `// 1. Déclaration du tableau
+let technologies = ["JavaScript", "HTML", "CSS", "React"];
+
+// 2. Afficher le premier et dernier élément
+console.log("Premier élément:", technologies[0]);
+console.log("Dernier élément:", technologies[technologies.length - 1]);
+
+// 3. Remplacer "CSS" par "CSS3"
+technologies[2] = "CSS3";
+
+// 4. Afficher le tableau final
+console.log("Tableau final:", technologies);`,
+            output: `Premier élément: JavaScript
+Dernier élément: React
+Tableau final: ["JavaScript", "HTML", "CSS3", "React"]`
+        },
+        2: {
+            title: "Exercice 2 – Vérification et longueur",
+            code: `let technologies = ["JavaScript", "HTML", "CSS3", "React"];
+
+// 1. Vérifier si c'est un tableau (2 méthodes)
+console.log("Méthode 1 - Array.isArray():", Array.isArray(technologies));
+console.log("Méthode 2 - instanceof:", technologies instanceof Array);
+
+// 2. Afficher la longueur
+console.log("Longueur du tableau:", technologies.length);
+
+// 3. Ajouter "NodeJS" à la fin
+technologies.push("NodeJS");
+console.log("Après ajout:", technologies);`,
+            output: `Méthode 1 - Array.isArray(): true
+Méthode 2 - instanceof: true
+Longueur du tableau: 4
+Après ajout: ["JavaScript", "HTML", "CSS3", "React", "NodeJS"]`
+        },
+        3: {
+            title: "Exercice 3 – Parcours du tableau",
+            code: `let technologies = ["JavaScript", "HTML", "CSS3", "React", "NodeJS"];
+
+// 1. Parcours avec boucle for
+console.log("=== Boucle for ===");
+for (let i = 0; i < technologies.length; i++) {
+    console.log(\`Index \${i}: \${technologies[i]}\`);
+}
+
+// 2. Parcours avec forEach
+console.log("\\n=== Méthode forEach ===");
+technologies.forEach((tech, index) => {
+    console.log(\`Index \${index}: \${tech}\`);
+});`,
+            output: `=== Boucle for ===
+Index 0: JavaScript
+Index 1: HTML
+Index 2: CSS3
+Index 3: React
+Index 4: NodeJS
+
+=== Méthode forEach ===
+Index 0: JavaScript
+Index 1: HTML
+Index 2: CSS3
+Index 3: React
+Index 4: NodeJS`
+        },
+        4: {
+            title: "Exercice 4 – Manipulation numérique",
+            code: `let notes = [10, 12, 15, 8, 18, 6];
+
+// 1. Filtrer les notes >= 10
+let notesFiltrées = notes.filter(note => note >= 10);
+console.log("Notes filtrées (>= 10):", notesFiltrées);
+
+// 2. Carré des notes filtrées
+let carrés = notesFiltrées.map(note => note ** 2);
+console.log("Carrés des notes:", carrés);
+
+// 3. Somme des carrés
+let somme = carrés.reduce((acc, val) => acc + val, 0);
+console.log("Somme des carrés:", somme);
+
+// 4. Affichage de tous les tableaux
+console.log("\\nTableau original:", notes);
+console.log("Notes filtrées:", notesFiltrées);
+console.log("Carrés:", carrés);
+console.log("Somme totale:", somme);`,
+            output: `Notes filtrées (>= 10): [10, 12, 15, 18]
+Carrés des notes: [100, 144, 225, 324]
+Somme des carrés: 793
+
+Tableau original: [10, 12, 15, 8, 18, 6]
+Notes filtrées: [10, 12, 15, 18]
+Carrés: [100, 144, 225, 324]
+Somme totale: 793`
+        },
+        5: {
+            title: "Exercice 5 – Ajout, suppression et modification",
+            code: `let numbers = [1, 2, 3, 4, 5];
+console.log("Tableau initial:", numbers);
+
+// 1. Ajouter 6 et 7 à la fin
+numbers.push(6, 7);
+console.log("Après ajout de 6 et 7:", numbers);
+
+// 2. Supprimer le dernier élément
+numbers.pop();
+console.log("Après suppression du dernier:", numbers);
+
+// 3. Supprimer le premier élément
+numbers.shift();
+console.log("Après suppression du premier:", numbers);
+
+// 4. Remplacer 3 par 10, 11 et 12
+let index = numbers.indexOf(3);
+numbers.splice(index, 1, 10, 11, 12);
+console.log("Après remplacement de 3:", numbers);
+
+// 5. Créer une copie
+let copie = [...numbers]; // ou numbers.slice()
+console.log("Copie du tableau:", copie);
+
+// 6. Extraire à partir de l'indice 2
+let extrait = numbers.slice(2);
+console.log("Extrait (indice 2+):", extrait);`,
+            output: `Tableau initial: [1, 2, 3, 4, 5]
+Après ajout de 6 et 7: [1, 2, 3, 4, 5, 6, 7]
+Après suppression du dernier: [1, 2, 3, 4, 5, 6]
+Après suppression du premier: [2, 3, 4, 5, 6]
+Après remplacement de 3: [2, 10, 11, 12, 4, 5, 6]
+Copie du tableau: [2, 10, 11, 12, 4, 5, 6]
+Extrait (indice 2+): [11, 12, 4, 5, 6]`
+        },
+        6: {
+            title: "Exercice 6 – Tableau d'objets",
+            code: `let students = [
+    { nom: "Ali", note: 12 },
+    { nom: "Sara", note: 9 },
+    { nom: "Omar", note: 15 },
+    { nom: "Lina", note: 18 }
+];
+
+// 1. Afficher nom et note de chaque étudiant
+console.log("=== Liste des étudiants ===");
+students.forEach(student => {
+    console.log(\`\${student.nom}: \${student.note}/20\`);
+});
+
+// 2. Filtrer les étudiants avec note >= 10
+let admis = students.filter(student => student.note >= 10);
+console.log("\\nÉtudiants admis:", admis);
+
+// 3. Tableau des noms des admis
+let nomsAdmis = admis.map(student => student.nom);
+console.log("Noms des admis:", nomsAdmis);
+
+// 4. Calculer la moyenne
+let moyenne = students.reduce((acc, student) => acc + student.note, 0) / students.length;
+console.log("Moyenne de la classe:", moyenne.toFixed(2));
+
+// 5. Vérifier si c'est un tableau
+console.log("Est un tableau?", Array.isArray(students));`,
+            output: `=== Liste des étudiants ===
+Ali: 12/20
+Sara: 9/20
+Omar: 15/20
+Lina: 18/20
+
+Étudiants admis: [{nom: "Ali", note: 12}, {nom: "Omar", note: 15}, {nom: "Lina", note: 18}]
+Noms des admis: ["Ali", "Omar", "Lina"]
+Moyenne de la classe: 13.50
+Est un tableau? true`
+        },
+        7: {
+            title: "Exercice 7 – Modification d'objets dans un tableau",
+            code: `let students = [
+    { nom: "Ali", note: 12 },
+    { nom: "Sara", note: 9 },
+    { nom: "Omar", note: 15 },
+    { nom: "Lina", note: 18 }
+];
+
+// 1. Ajouter un nouvel étudiant
+students.push({ nom: "Yassine", note: 14 });
+console.log("Après ajout:", students);
+
+// 2. Supprimer le dernier étudiant
+students.pop();
+console.log("\\nAprès suppression:", students);
+
+// 3. Modifier la note de Sara
+let sara = students.find(student => student.nom === "Sara");
+if (sara) {
+    sara.note = 11;
+}
+console.log("\\nAprès modification de Sara:", students);
+
+// Affichage final
+console.log("\\n=== Tableau final ===");
+students.forEach(s => console.log(\`\${s.nom}: \${s.note}\`));`,
+            output: `Après ajout: [
+  {nom: "Ali", note: 12},
+  {nom: "Sara", note: 9},
+  {nom: "Omar", note: 15},
+  {nom: "Lina", note: 18},
+  {nom: "Yassine", note: 14}
+]
+
+Après suppression: [
+  {nom: "Ali", note: 12},
+  {nom: "Sara", note: 9},
+  {nom: "Omar", note: 15},
+  {nom: "Lina", note: 18}
+]
+
+Après modification de Sara: [
+  {nom: "Ali", note: 12},
+  {nom: "Sara", note: 11},
+  {nom: "Omar", note: 15},
+  {nom: "Lina", note: 18}
+]
+
+=== Tableau final ===
+Ali: 12
+Sara: 11
+Omar: 15
+Lina: 18`
+        },
+            8: {
+                    title: "Exercice 8 – Tableau contenant des tableaux avec notes",
+                    code: `let classes = [
+    ["Ali", "Sara", "Omar"],
+    ["Lina", "Yassine"],
+    ["Amine", "Noor", "Salma"]
+];
+
+// 1. Afficher tous les noms
+for (let i = 0; i < classes.length; i++) {
+    console.log(classes[i]);
+    for (let j = 0; j < classes[i].length; j++) {
+        console.log(classes[i][j]);
+    }
+}
+
+// 2. Nombre total d'étudiants
+let totale = classes.reduce((a, b) => a + b.length, 0);
+console.log("Totale:", totale);
+
+// 3. Ajouter un étudiant à la deuxième classe
+classes[1].push("Karim");
+console.log("Classe 2 après ajout:", classes[1]);
+
+// 4. Trouver une classe avec plus de 2 étudiants
+let Classe2Plus = classes.find(classe => classe.length > 2);
+console.log("Classe de plus de 2 étudiants:", Classe2Plus);
+
+// 5. Ajouter des notes aléatoires aux étudiants
+classes = classes.map(classe =>
+    classe.map(nom => ({
+        nom: nom,
+        note: Math.floor(Math.random() * 21) // note entre 0 et 20
+    }))
+);
+console.log("Des classes avec notes:", classes);
+
+// 6. Trouver la meilleure note
+let meilleurNote = Math.max(...classes.flat().map(n => n.note));
+console.log("La meilleure note est:", meilleurNote);`,
+                    output: `[
+  ["Ali", "Sara", "Omar"],
+  ["Lina", "Yassine"],
+  ["Amine", "Noor", "Salma"]
+]
+Ali
+Sara
+Omar
+Lina
+Yassine
+Amine
+Noor
+Salma
+Totale: 8
+Classe 2 après ajout: ["Lina", "Yassine", "Karim"]
+Classe de plus de 2 étudiants: ["Ali", "Sara", "Omar"]
+Des classes avec notes: [
+  [{nom: "Ali", note: 12}, {nom: "Sara", note: 9}, {nom: "Omar", note: 15}],
+  [{nom: "Lina", note: 17}, {nom: "Yassine", note: 13}, {nom: "Karim", note: 19}],
+  [{nom: "Amine", note: 14}, {nom: "Noor", note: 11}, {nom: "Salma", note: 18}]
+]
+La meilleure note est: 19
+
+=== Raisons d'utiliser [] ===
+- Plus court et lisible
+- Évite les pièges: new Array(3) crée [empty × 3]
+- Syntaxe moderne recommandée`
+        },
+        9: {
+            title: "Exercice 9 – Synthèse finale",
+            code: `// 1. Créer le tableau de produits
+let produits = [
+    { nom: "Ordinateur", prix: 800 },
+    { nom: "Souris", prix: 25 },
+    { nom: "Écran", prix: 250 },
+    { nom: "Clavier", prix: 80 },
+    { nom: "Casque", prix: 150 }
+];
+
+console.log("=== Tableau initial ===");
+console.log(produits);
+
+// 2. Filtrer les produits >= 100
+let produitsFiltrés = produits.filter(p => p.prix >= 100);
+console.log("\\n=== Produits >= 100€ ===");
+console.log(produitsFiltrés);
+
+// 3. Appliquer réduction de 10%
+let produitsRéduits = produitsFiltrés.map(p => ({
+    nom: p.nom,
+    prixOriginal: p.prix,
+    prixRéduit: p.prix * 0.9
+}));
+console.log("\\n=== Après réduction de 10% ===");
+console.log(produitsRéduits);
+
+// 4. Calculer le total après réduction
+let total = produitsRéduits.reduce((acc, p) => acc + p.prixRéduit, 0);
+
+// 5. Affichage final
+console.log("\\n=== RÉCAPITULATIF ===");
+produitsRéduits.forEach(p => {
+    console.log(\`\${p.nom}: \${p.prixOriginal}€ → \${p.prixRéduit.toFixed(2)}€\`);
+});
+console.log(\`\\nTOTAL APRÈS RÉDUCTION: \${total.toFixed(2)}€\`);`,
+            output: `=== Tableau initial ===
+[
+  {nom: "Ordinateur", prix: 800},
+  {nom: "Souris", prix: 25},
+  {nom: "Écran", prix: 250},
+  {nom: "Clavier", prix: 80},
+  {nom: "Casque", prix: 150}
+]
+
+=== Produits >= 100€ ===
+[
+  {nom: "Ordinateur", prix: 800},
+  {nom: "Écran", prix: 250},
+  {nom: "Casque", prix: 150}
+]
+
+=== Après réduction de 10% ===
+[
+  {nom: "Ordinateur", prixOriginal: 800, prixRéduit: 720},
+  {nom: "Écran", prixOriginal: 250, prixRéduit: 225},
+  {nom: "Casque", prixOriginal: 150, prixRéduit: 135}
+]
+
+=== RÉCAPITULATIF ===
+Ordinateur: 800€ → 720.00€
+Écran: 250€ → 225.00€
+Casque: 150€ → 135.00€
+
+TOTAL APRÈS RÉDUCTION: 1080.00€`
+        },
+        reflexion: {
+            title: "Questions de Réflexion",
+            sections: [
+                {
+                    question: "1. Quelle est la différence entre map() et forEach() ?",
+                    answer: `<strong>forEach():</strong>
+- Parcourt le tableau et exécute une fonction pour chaque élément
+- NE retourne RIEN (undefined)
+- Utilisé pour les effets de bord (console.log, modifications)
+- Exemple: afficher des éléments
+
+<strong>map():</strong>
+- Parcourt le tableau et transforme chaque élément
+- RETOURNE un NOUVEAU tableau
+- Ne modifie pas le tableau original
+- Utilisé pour transformer des données
+- Exemple: doubler tous les nombres
+
+<strong>Exemple pratique:</strong>
+let nombres = [1, 2, 3, 4];
+
+// forEach - pas de retour
+nombres.forEach(n => console.log(n * 2)); // Affiche: 2, 4, 6, 8
+// Retourne: undefined
+
+// map - retourne un nouveau tableau
+let doubles = nombres.map(n => n * 2);
+console.log(doubles); // [2, 4, 6, 8]`
+                },
+                {
+                    question: "2. Pourquoi slice() ne modifie pas le tableau original ?",
+                    answer: `<strong>Raisons:</strong>
+
+1. <strong>Méthode non-mutante:</strong>
+   - slice() fait partie des méthodes qui ne modifient pas le tableau original
+   - Elle crée une COPIE superficielle (shallow copy)
+
+2. <strong>Principe d'immutabilité:</strong>
+   - Préserve les données originales
+   - Évite les effets de bord inattendus
+   - Facilite le debugging et le suivi des changements
+
+3. <strong>Méthodes mutantes vs non-mutantes:</strong>
+
+<strong>Mutantes (modifient l'original):</strong>
+- push(), pop(), shift(), unshift()
+- splice(), sort(), reverse()
+
+<strong>Non-mutantes (retournent une copie):</strong>
+- slice(), concat(), map(), filter()
+- reduce(), find(), includes()
+
+<strong>Exemple:</strong>
+let original = [1, 2, 3, 4, 5];
+let copie = original.slice(1, 3);
+
+console.log(original); // [1, 2, 3, 4, 5] - inchangé
+console.log(copie);    // [2, 3] - nouvelle copie`
+                },
+                {
+                    question: "3. Dans quels cas utiliser reduce() ?",
+                    answer: `<strong>reduce() est idéal pour:</strong>
+
+1. <strong>Calculer une somme/total:</strong>
+let prix = [10, 20, 30];
+let total = prix.reduce((acc, p) => acc + p, 0); // 60
+
+2. <strong>Compter des occurrences:</strong>
+let fruits = ['pomme', 'banane', 'pomme'];
+let compte = fruits.reduce((acc, fruit) => {
+    acc[fruit] = (acc[fruit] || 0) + 1;
+    return acc;
+}, {}); // {pomme: 2, banane: 1}
+
+3. <strong>Transformer un tableau en objet:</strong>
+let users = [{id: 1, nom: 'Ali'}, {id: 2, nom: 'Sara'}];
+let usersObj = users.reduce((acc, user) => {
+    acc[user.id] = user;
+    return acc;
+}, {}); // {1: {id:1, nom:'Ali'}, 2: {id:2, nom:'Sara'}}
+
+4. <strong>Aplatir un tableau (flatten):</strong>
+let nested = [[1, 2], [3, 4], [5]];
+let flat = nested.reduce((acc, arr) => acc.concat(arr), []);
+// [1, 2, 3, 4, 5]
+
+5. <strong>Trouver un maximum/minimum:</strong>
+let notes = [12, 18, 9, 15];
+let max = notes.reduce((max, note) => note > max ? note : max);
+// 18
+
+<strong>Quand NE PAS utiliser reduce():</strong>
+- Pour simplement parcourir: utilisez forEach()
+- Pour transformer: utilisez map()
+- Pour filtrer: utilisez filter()
+- reduce() est pour RÉDUIRE un tableau à une seule valeur`
+                }
+            ]
+        }
+    };
+
+    function showExercise(num) {
+        const modal = document.getElementById('modal');
+        const modalBody = document.getElementById('modal-body');
+        const ex = exercises[num];
+
+        if (num === 'reflexion') {
+            let html = `<h2>${ex.title}</h2>`;
+            ex.sections.forEach(section => {
+                html += `
+                        <div class="section">
+                            <h4>${section.question}</h4>
+                            <pre><code>${section.answer}</code></pre>
+                        </div>
+                    `;
+            });
+            modalBody.innerHTML = html;
+        } else {
+            modalBody.innerHTML = `
+                    <h2>${ex.title}</h2>
+                    <div class="section">
+                        <h4>💻 Code Solution:</h4>
+                        <pre><code>${ex.code}</code></pre>
+                    </div>
+                    <div class="section">
+                        <h4>✅ Résultat:</h4>
+                        <div class="output">
+                            <pre><code>${ex.output}</code></pre>
+                        </div>
+                    </div>
+                `;
+        }
+
+        modal.classList.add('active');
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('modal');
+        modal.classList.remove('active');
+    }
+
+    // Fermer avec Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+    });
+
+    // Fermer en cliquant en dehors
+    document.getElementById('modal').addEventListener('click', (e) => {
+        if (e.target.id === 'modal') closeModal();
+    });
+</script>
+</body>
+</html>
