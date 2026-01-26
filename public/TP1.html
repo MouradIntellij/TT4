@@ -678,7 +678,7 @@ console.log(produits);
 
 // 2. Filtrer les produits >= 100
 let produitsFiltrés = produits.filter(p => p.prix >= 100);
-console.log("\\n=== Produits >= 100€ ===");
+console.log("\\n=== Produits >= 100$ ===");
 console.log(produitsFiltrés);
 
 // 3. Appliquer réduction de 10%
@@ -696,9 +696,9 @@ let total = produitsRéduits.reduce((acc, p) => acc + p.prixRéduit, 0);
 // 5. Affichage final
 console.log("\\n=== RÉCAPITULATIF ===");
 produitsRéduits.forEach(p => {
-    console.log(\`\${p.nom}: \${p.prixOriginal}€ → \${p.prixRéduit.toFixed(2)}€\`);
+    console.log(\`\${p.nom}: \${p.prixOriginal}$ → \${p.prixRéduit.toFixed(2)}$\`);
 });
-console.log(\`\\nTOTAL APRÈS RÉDUCTION: \${total.toFixed(2)}€\`);`,
+console.log(\`\\nTOTAL APRÈS RÉDUCTION: \${total.toFixed(2)}$\`);`,
             output: `=== Tableau initial ===
 [
   {nom: "Ordinateur", prix: 800},
@@ -708,7 +708,7 @@ console.log(\`\\nTOTAL APRÈS RÉDUCTION: \${total.toFixed(2)}€\`);`,
   {nom: "Casque", prix: 150}
 ]
 
-=== Produits >= 100€ ===
+=== Produits >= 100$ ===
 [
   {nom: "Ordinateur", prix: 800},
   {nom: "Écran", prix: 250},
@@ -723,11 +723,11 @@ console.log(\`\\nTOTAL APRÈS RÉDUCTION: \${total.toFixed(2)}€\`);`,
 ]
 
 === RÉCAPITULATIF ===
-Ordinateur: 800€ → 720.00€
-Écran: 250€ → 225.00€
-Casque: 150€ → 135.00€
+Ordinateur: 800$ → 720.00$
+Écran: 250$ → 225.00$
+Casque: 150$ → 135.00$
 
-TOTAL APRÈS RÉDUCTION: 1080.00€`
+TOTAL APRÈS RÉDUCTION: 1080.00$`
         },
         reflexion: {
             title: "Questions de Réflexion",
