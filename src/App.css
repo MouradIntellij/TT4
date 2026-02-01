@@ -6,7 +6,6 @@
   height: 40vmin;
   pointer-events: none;
 }
-h1
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -21,7 +20,7 @@ h1
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(6px + 2vmin);
+  font-size: calc(10px + 2vmin);
   color: white;
 }
 
@@ -36,118 +35,4 @@ h1
   to {
     transform: rotate(360deg);
   }
-}
-
-.react-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  width: 100%;
-
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: clamp(1.1rem, 2vw, 1.6rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: #61dafb;
-}
-
-.react-logo {
-  display: inline-block; /* Nécessaire pour appliquer transform */
-  animation: App-logo-spin infinite 15s linear
-}
-
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg); /* Fait tourner l'image */
-  }
-}
-
-
-
-
-body {
-  font-family: Arial, sans-serif;
-  background: #f9f9f9;
-  margin: 0;
-  padding: 20px;
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.card-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.card {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  padding: 20px;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 12px rgba(0,0,0,0.2);
-}
-
-.card h2 {
-  margin-top: 0;
-  font-size: 1.4em;
-  margin-bottom: 10px;
-}
-
-.card p {
-  margin: 5px 0;
-}
-
-.btn {
-  display: inline-block;
-  margin-top: 10px;
-  text-decoration: none;
-  color: #fff;
-  background-color: #007bff;
-  padding: 8px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  border: none;
-  transition: background-color 0.2s;
-}
-
-.btn:hover {
-  background-color: #0056b3;
-}
-
-.disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-.tp-list {
-  list-style: none;
-  padding-left: 0;
-  margin-top: 0.5rem;
-}
-
-.tp-list li {
-  margin: 0.4rem 0;
-}
-
-.tp-list a {
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.tp-list a.disabled {
-  color: #999;
-  cursor: not-allowed;
-  pointer-events: none;
-  opacity: 0.7;
 }
