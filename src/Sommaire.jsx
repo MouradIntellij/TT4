@@ -52,7 +52,7 @@ export default function Sommaire() {
                         "Atelier pratique : Dashboard de veille technologique",
                     ]}
                     disabled={true}
-                    guideLink="#"
+                    guideLink="/under-construction"
                 >
                     <button className="disabled-btn">Page en construction</button>
                 </ChapitreCard>
@@ -70,7 +70,7 @@ export default function Sommaire() {
                         <ul className="tp-list">
                             {tpList.map((tp, i) => (
                                 <li key={i}>
-                                    <a className="disabled">{tp}</a>
+                                    <button className="disabled-btn">{tp}</button>
                                 </li>
                             ))}
                         </ul>
@@ -90,7 +90,7 @@ export default function Sommaire() {
                         "Pratique : Mon Portfolio - Section Contact & Filtres",
                     ]}
                     disabled={true}
-                    guideLink="#"
+                    guideLink="/under-construction"
                 >
                     <button className="disabled-btn">Page en construction</button>
                 </ChapitreCard>
@@ -101,7 +101,7 @@ export default function Sommaire() {
                         "Évaluation des connaissances acquises sur Node.js et JS moderne.",
                     ]}
                     disabled={true}
-                    guideLink="#"
+                    guideLink="/under-construction"
                 >
                     <button className="disabled-btn">Page en construction</button>
                 </ChapitreCard>
