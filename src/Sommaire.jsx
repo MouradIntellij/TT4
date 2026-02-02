@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import ChapitreCard from "./ChapitreCard";
+import { Link } from "react-router-dom";
 
 export default function Sommaire() {
     const [showTP, setShowTP] = useState(false);
 
+    // Transformer tpList en tableau d'objets avec nom et lien
     const tpList = [
-        "TP1 — Todo List",
-        "TP2 — Compteur",
-        "TP3 — Calculatrice",
-        "TP4 — Liste de contacts",
-        "TP5 — Quiz interactif",
-        "TP6 — Application météo (API)",
-        "TP7 — Blog CRUD",
-        "TP8 — Dashboard admin",
-        "TP9 — Portfolio React",
+        { name: "TP1 — Todo List", link: "/tp1-todolist", disabled: false },
+        { name: "TP2 — Compteur", link: "/tp2-compteur", disabled: true },
+        { name: "TP3 — Calculatrice", link: "/tp3-calculatrice", disabled: true },
+        { name: "TP4 — Liste de contacts", link: "/tp4-contacts", disabled: true },
+        { name: "TP5 — Quiz interactif", link: "/tp5-quiz", disabled: true },
+        { name: "TP6 — Application météo (API)", link: "/tp6-meteo", disabled: true },
+        { name: "TP7 — Blog CRUD", link: "/tp7-blog", disabled: true },
+        { name: "TP8 — Dashboard admin", link: "/tp8-dashboard", disabled: true },
+        { name: "TP9 — Portfolio React", link: "/tp9-portfolio", disabled: true },
     ];
 
     return (
@@ -71,7 +73,13 @@ export default function Sommaire() {
                         <ul className="tp-list">
                             {tpList.map((tp, i) => (
                                 <li key={i}>
-                                    <button className="disabled-btn">{tp}</button>
+                                    {tp.disabled ? (
+                                        <button className="disabled-btn">{tp.name}</button>
+                                    ) : (
+                                        <Link to={tp.link} className="btn">
+                                            {tp.name}
+                                        </Link>
+                                    )}
                                 </li>
                             ))}
                         </ul>
