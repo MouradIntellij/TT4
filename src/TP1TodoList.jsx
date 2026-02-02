@@ -3,8 +3,8 @@ import './App.css';
 
 export default function TP1TodoList() {
     const [showSolution, setShowSolution] = useState(false);
-
-    return (
+    const solutionEnabled = false;
+        return (
         <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
             <h1>🎯 TP1 — Application Todo List en React</h1>
             
@@ -108,23 +108,36 @@ export default function TP1TodoList() {
                 </p>
             </section>
 
+
             {/* BOUTON POUR AFFICHER LA SOLUTION */}
             <div style={{ textAlign: 'center', margin: '30px 0' }}>
-                <button 
-                    onClick={() => setShowSolution(!showSolution)}
-                    className="btn"
-                    style={{ 
-                        padding: '15px 30px', 
-                        fontSize: '18px',
-                        backgroundColor: showSolution ? '#f44336' : '#4CAF50',
-                        color: 'white',
-                        border: 'none',
+                {solutionEnabled ? (
+                    <button
+                        onClick={() => setShowSolution(!showSolution)}
+                        className="btn"
+                        style={{
+                            padding: '15px 30px',
+                            fontSize: '18px',
+                            backgroundColor: showSolution ? '#f44336' : '#4CAF50',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '5px',
+                            cursor: 'pointer'
+                        }}
+                    >
+                        {showSolution ? '🔒 Masquer la solution' : '🔓 Voir la solution complète'}
+                    </button>
+                ) : (
+                    <div style={{
+                        padding: '15px 30px',
+                        backgroundColor: '#e0e0e0',
+                        color: '#666',
                         borderRadius: '5px',
-                        cursor: 'pointer'
-                    }}
-                >
-                    {showSolution ? '🔒 Masquer la solution' : '🔓 Voir la solution complète'}
-                </button>
+                        display: 'inline-block'
+                    }}>
+                        🔒 Solution disponible après la date limite du TP
+                    </div>
+                )}
             </div>
 
             {/* SECTION SOLUTION */}
