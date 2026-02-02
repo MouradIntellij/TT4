@@ -3,7 +3,7 @@ import Sommaire from "./Sommaire";
 import UnderConstruction from "./UnderConstruction";
 import ReactGuide from "./ReactGuide";
 import HtmlViewer from "./HtmlViewer";
-import TP1_TodoList  from "./TP1_todolist";
+import TP1TodoList from "./TP1TodoList"
 
 function App() {
     return (
@@ -11,7 +11,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Sommaire />} />
                 <Route path="/GuideReact" element={<ReactGuide />} />
-                <Route path="/tp1-todolist" element={<TP1_TodoList />} />
+                <Route path="/tp1-todolist" element={<TP1TodoList />} />
                 <Route path="/html/:filename" element={<HtmlViewer />} />  {/* ← AJOUTER */}
                 <Route path="/under-construction" element={<UnderConstruction />} />
             </Routes>

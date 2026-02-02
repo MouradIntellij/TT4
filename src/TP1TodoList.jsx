@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 
-export default function TP1_TodoList() {
+export default function TP1TodoList() {
     const [showSolution, setShowSolution] = useState(false);
 
     return (
