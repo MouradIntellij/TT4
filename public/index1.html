@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>TP Node.js & JS — Sommaire</title>
+    <link rel="stylesheet" href="public/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 { text-align: center; margin-bottom: 40px; }
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+        }
+        .card h2 {
+            margin-top: 0;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+        .card p {
+            margin: 5px 0;
+        }
+        .card a {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+        }
+        .card a:hover {
+            background-color: #0056b3;
+        }
+        .disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+<h1>📚 Sommaire du cours Tendances Technologiques TT4 : Node.js </h1>
+<h2> Mourad Sehboub  ---  Collège LaSalle. </h2>
+
+<div class="card-container">
+    <!-- Chapitre 1 -->
+    <div class="card">
+        <h2>Chapitre 1 — Panorama</h2>
+        <p>Qu'est-ce qu'une tendance ? État du Web, Cloud et IA.</p>
+        <p>Théorie : Qu'est-ce qu'une tendance technologique ?</p>
+        <p>Pratique : Installation de l'écosystème</p>
+        <p>Initiation : Premiers scripts & logique</p>
+        <a href="/chapitre1.html">▶ Accéder au chapitre</a>
+    </div>
+
+    <!-- Chapitre 2 -->
+    <div class="card">
+        <h2>Chapitre 2 — JS Moderne (ES6+)</h2>
+        <p>Rappels et passage à l'ES6+ : let/const, fonctions fléchées, modules.</p>
+        <p>Théorie : Pourquoi "Moderne" ?</p>
+        <p>Fondamentaux de la syntaxe, manipulation avancée des données</p>
+        <p>Modularité et organisation</p>
+        <a href="/js.html">▶ Accéder au chapitre</a>
+    </div>
+
+    <!-- Chapitre 3 -->
+    <div class="card disabled">
+        <h2>Chapitre 3 — Asynchronisme & API</h2>
+        <p>Maîtrise de async/await et fetch pour consommer des données externes.</p>
+        <p>Gestion des erreurs et robustesse</p>
+        <p>Atelier pratique : Dashboard de veille technologique</p>
+        <a href="#">▶ Accéder au chapitre</a>
+    </div>
+
+    <!-- Chapitre 4 -->
+    <div class="card disabled">
+        <h2>Chapitre 4 — React.js : Bases</h2>
+        <p>Architecture par composants, JSX et passage de props</p>
+        <p>Théorie : Le paradigme React</p>
+        <p>Atelier pratique : Démarrage du Portfolio</p>
+    </div>
+
+    <!-- Chapitre 5 -->
+    <div class="card disabled">
+        <h2>Chapitre 5 — React.js : État & Hooks</h2>
+        <p>Gestion du useState, formulaires et interactivité utilisateur</p>
+        <p>Pratique : Mon Portfolio - Section Contact & Filtres</p>
+    </div>
+
+    <!-- Examen 1 -->
+    <div class="card disabled">
+        <h2>Examen 1 — Formative</h2>
+        <p>Évaluation des connaissances acquises sur Node.js et JS moderne.</p>
+    </div>
+</div>
+</body>
+</html>
