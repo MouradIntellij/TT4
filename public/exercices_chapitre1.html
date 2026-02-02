@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>🎓 Node.js — Exercices Pédagogiques</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        /* ===== STYLE IDENTIQUE À TA VERSION ===== */
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{
+            font-family:'Segoe UI',sans-serif;
+            background:linear-gradient(135deg,#f093fb,#f5576c);
+            padding:20px;
+        }
+        .container{max-width:1400px;margin:auto}
+        header{
+            background:#fff;
+            border-radius:20px;
+            padding:40px;
+            text-align:center;
+            box-shadow:0 20px 60px rgba(0,0,0,.3);
+            margin-bottom:30px;
+        }
+        h1{color:#f5576c;font-size:3em}
+        .subtitle{color:#764ba2}
+
+        .exercise-card{
+            background:#fff;
+            border-radius:20px;
+            padding:30px;
+            margin-bottom:30px;
+            box-shadow:0 10px 40px rgba(0,0,0,.2);
+            border-left:8px solid #f5576c;
+        }
+
+        .exercise-header{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:15px;
+        }
+
+        .solution{display:none}
+        .solution.show{display:block}
+
+        .solution-toggle{
+            margin-top:20px;
+            padding:12px 25px;
+            border:none;
+            border-radius:30px;
+            background:linear-gradient(135deg,#667eea,#764ba2);
+            color:white;
+            font-weight:bold;
+            cursor:pointer;
+        }
+
+        pre{
+            background:#1e1e1e;
+            color:#d4d4d4;
+            padding:20px;
+            border-radius:10px;
+            overflow-x:auto;
+            margin-top:15px;
+        }
+
+        .badge{
+            padding:6px 15px;
+            border-radius:20px;
+            color:white;
+            font-weight:bold;
+        }
+        .easy{background:#43e97b}
+        .medium{background:#fa709a}
+        .hard{background:#667eea}
+
+        .file-name{
+            display:inline-block;
+            background:#f093fb;
+            color:white;
+            padding:5px 12px;
+            border-radius:6px;
+            margin-top:10px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <header>
+        <h1>🎓 Node.js — Exercices Pédagogiques</h1>
+        <p class="subtitle">Progressifs • Commentés • Solutions incluses</p>
+        <p>DEC Informatique — Niveau Collégial</p>
+    </header>
+
+    <!-- EXERCICE 1 -->
+    <div class="exercise-card">
+        <div class="exercise-header">
+            <h2>1️⃣ Serveur HTTP</h2>
+            <span class="badge easy">Facile</span>
+        </div>
+
+        <p>Créer un serveur Node.js qui affiche un message simple.</p>
+
+        <button class="solution-toggle" onclick="toggleSolution('s1')">Voir solution</button>
+
+        <div id="s1" class="solution">
+            <span class="file-name">ex1.js</span>
+            <pre><code>const http = require('http');
+
+const server = http.createServer((req, res) => {
+    res.writeHead(200, {'Content-Type':'text/plain'});
+    res.end('Bonjour Node.js !');
+});
+
+server.listen(3000);
+</code></pre>
+        </div>
+    </div>
+
+    <!-- EXERCICE 2 -->
+    <div class="exercise-card">
+        <div class="exercise-header">
+            <h2>2️⃣ Routage simple</h2>
+            <span class="badge easy">Facile</span>
+        </div>
+
+        <button class="solution-toggle" onclick="toggleSolution('s2')">Voir solution</button>
+
+        <div id="s2" class="solution">
+            <span class="file-name">ex2.js</span>
+            <pre><code>const http = require('http');
+
+http.createServer((req,res)=>{
+if(req.url==='/'){
+res.end('Accueil');
+}else if(req.url==='/contact'){
+res.end('Contact');
+}else{
+res.writeHead(404);
+res.end('Page non trouvée');
+}
+}).listen(3000);
+</code></pre>
+        </div>
+    </div>
+
+    <!-- EXERCICE 3 -->
+    <div class="exercise-card">
+        <div class="exercise-header">
+            <h2>3️⃣ Paramètres GET</h2>
+            <span class="badge easy">Facile</span>
+        </div>
+
+        <button class="solution-toggle" onclick="toggleSolution('s3')">Voir solution</button>
+
+        <div id="s3" class="solution">
+            <span class="file-name">ex3.js</span>
+            <pre><code>const http = require('http');
+const url = require('url');
+
+http.createServer((req,res)=>{
+const query = url.parse(req.url,true).query;
+res.end('Bonjour '+(query.nom || 'inconnu'));
+}).listen(3000);
+</code></pre>
+        </div>
+    </div>
+
+    <!-- EXERCICE 4 -->
+    <div class="exercise-card">
+        <div class="exercise-header">
+            <h2>4️⃣ POST + formulaire</h2>
+            <span class="badge medium">Moyen</span>
+        </div>
+
+        <button class="solution-toggle" onclick="toggleSolution('s4')">Voir solution</button>
+
+        <div id="s4" class="solution">
+            <span class="file-name">ex4.js</span>
+            <pre><code>
+                <p>// Voir version expliquée précédemment (POST + querystring)</p>
+                 <a href="http://localhost:3000" target="_blank">
+                     <p class="badge" >▶️ Lancer l’exercice 4 — Formulaire POST</p></a>
+
+</code></pre>
+        </div>
+    </div>
+
+    <!-- EXERCICE 5 -->
+    <div class="exercise-card">
+        <div class="exercise-header">
+            <h2>5️⃣ Lecture de fichiers</h2>
+            <span class="badge medium">Moyen</span>
+        </div>
+
+        <button class="solution-toggle" onclick="toggleSolution('s5')">Voir solution</button>
+
+        <div id="s5" class="solution">
+            <span class="file-name">ex5.js</span>
+            <pre><code>const fs = require('fs');
+fs.readFile('test.txt','utf8',(err,data)=>{
+if(err) console.log(err);
+else console.log(data);
+});
+</code></pre>
+        </div>
+    </div>
+
+    <!-- EXERCICE 6 -->
+    <div class="exercise-card">
+        <div class="exercise-header">
+            <h2>6️⃣ Upload de fichiers</h2>
+            <span class="badge medium">Moyen</span>
+        </div>
+
+        <p>Utilisation de formidable (voir exercice détaillé précédent).</p>
+    </div>
+
+    <!-- EXERCICE 7 -->
+    <div class="exercise-card">
+        <div class="exercise-header">
+            <h2>7️⃣ API externe (Axios)</h2>
+            <span class="badge hard">Difficile</span>
+        </div>
+
+        <button class="solution-toggle" onclick="toggleSolution('s7')">Voir solution</button>
+
+        <div id="s7" class="solution">
+            <span class="file-name">ex7.js</span>
+            <pre><code>const axios = require('axios');
+
+axios.get('https://api.chucknorris.io/jokes/random')
+.then(res => console.log(res.data.value));
+</code></pre>
+        </div>
+    </div>
+
+    <!-- EXERCICE 8 -->
+    <div class="exercise-card">
+        <div class="exercise-header">
+            <h2>8️⃣ Mini-projet Express</h2>
+            <span class="badge hard">Difficile</span>
+        </div>
+
+        <p>Créer un mini site avec Express.js (routes, middleware).</p>
+    </div>
+
+</div>
+
+<script>
+    function toggleSolution(id){
+        document.getElementById(id).classList.toggle('show');
+    }
+</script>
+
+</body>
+</html>

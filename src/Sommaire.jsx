@@ -30,7 +30,8 @@ export default function Sommaire() {
                         "Pratique : Installation de l'écosystème",
                         "Initiation : Premiers scripts & logique",
                     ]}
-                    guideLink="/chapitre1"
+                    guideLink="/html/chapitre1"
+                    exercicesLink="/html/exercices_chapitre1"
                 />
 
                 <ChapitreCard
@@ -41,7 +42,7 @@ export default function Sommaire() {
                         "Fondamentaux de la syntaxe, manipulation avancée des données",
                         "Modularité et organisation",
                     ]}
-                    guideLink="/js"
+                    guideLink="/html/js"
                 />
 
                 <ChapitreCard
