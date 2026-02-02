@@ -53,7 +53,9 @@ export default function Sommaire() {
                     ]}
                     disabled={true}
                     guideLink="#"
-                />
+                >
+                    <button className="disabled-btn">Page en construction</button>
+                </ChapitreCard>
 
                 <ChapitreCard
                     title="Chapitre 4 — React.js : Bases"
@@ -89,7 +91,9 @@ export default function Sommaire() {
                     ]}
                     disabled={true}
                     guideLink="#"
-                />
+                >
+                    <button className="disabled-btn">Page en construction</button>
+                </ChapitreCard>
 
                 <ChapitreCard
                     title="Examen 1 — Formative"
@@ -98,7 +102,9 @@ export default function Sommaire() {
                     ]}
                     disabled={true}
                     guideLink="#"
-                />
+                >
+                    <button className="disabled-btn">Page en construction</button>
+                </ChapitreCard>
             </div>
         </>
     );
